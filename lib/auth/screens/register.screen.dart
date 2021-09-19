@@ -1,27 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:fundl_app/auth/screens/forgot_password.screen.dart';
-import 'package:fundl_app/auth/screens/register.screen.dart';
-import 'package:fundl_app/auth/widgets/login_form.widget.dart';
-import 'package:fundl_app/home/screens/home.screen.dart';
+import 'package:fundl_app/auth/widgets/register_form.widget.dart';
 
-class LoginScreen extends StatelessWidget {
-  static const routeName = '/login';
+import 'login.screen.dart';
 
-  const LoginScreen({Key? key}) : super(key: key);
+class RegisterScreen extends StatelessWidget {
+  static const routeName = '/register';
+
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    void _handleLogin(String username, String password) {
-      Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
-    }
-
-    void _handleForgotPassword() {
-      Navigator.of(context).pushNamed(ForgotPasswordScreen.routeName);
-    }
-
-    void _handleRedirectSignUp() {
-      Navigator.of(context).pushReplacementNamed(RegisterScreen.routeName);
+    void _handleRedirectSignIn() {
+      Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
     }
 
     return Scaffold(
@@ -31,12 +21,10 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 100.0),
-              SvgPicture.asset('assets/text_logo.svg'),
-              const SizedBox(height: 70.0),
               Row(
                 children: const [
                   Text(
-                    'Sign In',
+                    'Sign Up',
                     style: TextStyle(
                       fontSize: 24.0,
                       fontWeight: FontWeight.bold,
@@ -45,23 +33,20 @@ class LoginScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20.0),
-              LoginForm(
-                onLogin: _handleLogin,
-                onForgotPassword: _handleForgotPassword,
-              ),
+              const RegisterForm(),
               const Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    'Don’t have an account?',
+                    'Already have an account?',
                     style: TextStyle(
                       fontSize: 15.0,
                     ),
                   ),
                   const SizedBox(width: 5.0),
                   GestureDetector(
-                    onTap: _handleRedirectSignUp,
+                    onTap: _handleRedirectSignIn,
                     child: Text(
                       'Sign Up',
                       style: TextStyle(

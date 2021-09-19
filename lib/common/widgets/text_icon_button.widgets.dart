@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 
 class TextIconButton extends StatefulWidget {
-  const TextIconButton({Key? key}) : super(key: key);
+  const TextIconButton({
+    Key? key,
+    required this.text,
+    this.icon,
+    this.onClick,
+  }) : super(key: key);
+
+  final String text;
+  final IconData? icon;
+  final VoidCallback? onClick;
 
   @override
   State<TextIconButton> createState() => _TextIconButtonState();
@@ -34,8 +42,8 @@ class _TextIconButtonState extends State<TextIconButton> {
           color: Theme.of(context).colorScheme.primaryVariant,
           borderRadius: BorderRadius.circular(25.0),
         ),
-        child: const Icon(
-          IconlyLight.arrowRight,
+        child: Icon(
+          widget.icon,
           color: Colors.white,
         ),
       );
@@ -44,6 +52,7 @@ class _TextIconButtonState extends State<TextIconButton> {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     return GestureDetector(
+      onTap: widget.onClick,
       onTapDown: (_) {
         _setPressed(true);
         _setTriggered(true);
@@ -65,21 +74,24 @@ class _TextIconButtonState extends State<TextIconButton> {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Stack(
             children: [
-              const Align(
+              Align(
                 alignment: Alignment.center,
                 child: Text(
-                  'LOG IN',
-                  style: TextStyle(
+                  widget.text,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: _buildIcon(context),
-              ),
+              Visibility(
+                visible: widget.icon != null,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: _buildIcon(context),
+                ),
+              )
             ],
           ),
         ),
