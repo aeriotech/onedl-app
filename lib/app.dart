@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:fundl_app/auth/screens/forgot_password.screen.dart';
 import 'package:fundl_app/auth/screens/register.screen.dart';
+import 'package:fundl_app/coupon/screens/coupon.screen.dart';
+import 'package:fundl_app/home/screens/home.screen.dart';
+import 'package:fundl_app/home/screens/main.screen.dart';
+import 'package:fundl_app/profile/screens/profile.screen.dart';
 
 import 'auth/screens/login.screen.dart';
 import 'common/theme.dart';
-import 'home/screens/home.screen.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -12,13 +15,15 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: LoginScreen.routeName,
+      initialRoute: MainScreen.routeName,
       theme: AppTheme.getDefault(),
       routes: {
         LoginScreen.routeName: (context) => const LoginScreen(),
         RegisterScreen.routeName: (context) => const RegisterScreen(),
         ForgotPasswordScreen.routeName: (context) => const ForgotPasswordScreen(),
-        HomeScreen.routeName: (context) => const HomeScreen(),
+        MainScreen.routeName: (context) => MainScreen(),
+        ProfileScreen.routeName: (context) => const ProfileScreen(),
+        CouponScreen.routeName: (context) => const CouponScreen(),
       },
     );
   }

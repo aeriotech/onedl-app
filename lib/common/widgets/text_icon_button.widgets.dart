@@ -48,6 +48,12 @@ class _TextIconButtonState extends State<TextIconButton> {
         ),
       );
 
+  TextStyle get _textStyle => const TextStyle(
+        color: Colors.white,
+        fontSize: 16.0,
+        fontWeight: FontWeight.bold,
+      );
+
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -78,11 +84,7 @@ class _TextIconButtonState extends State<TextIconButton> {
                 alignment: Alignment.center,
                 child: Text(
                   widget.text,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: _textStyle,
                 ),
               ),
               Visibility(

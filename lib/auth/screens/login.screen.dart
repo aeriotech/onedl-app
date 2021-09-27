@@ -3,7 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fundl_app/auth/screens/forgot_password.screen.dart';
 import 'package:fundl_app/auth/screens/register.screen.dart';
 import 'package:fundl_app/auth/widgets/login_form.widget.dart';
-import 'package:fundl_app/home/screens/home.screen.dart';
+import 'package:fundl_app/common/assets.dart';
+import 'package:fundl_app/home/screens/main.screen.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeName = '/login';
@@ -13,7 +14,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void _handleLogin(String username, String password) {
-      Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+      Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
     }
 
     void _handleForgotPassword() {
@@ -31,7 +32,7 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 100.0),
-              SvgPicture.asset('assets/text_logo.svg'),
+              SvgPicture.asset(AppAssets.textLogo),
               const SizedBox(height: 70.0),
               Row(
                 children: const [

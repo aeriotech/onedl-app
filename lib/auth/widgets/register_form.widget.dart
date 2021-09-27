@@ -22,6 +22,33 @@ class _RegisterFormState extends State<RegisterForm> {
         onPressed: _toggleShowPassword,
       );
 
+  InputDecoration get _firstNameInputDecoration => const InputDecoration(
+        hintText: 'First name',
+        prefixIcon: Icon(IconlyLight.profile),
+      );
+
+  InputDecoration get _lastNameInputDecoration => const InputDecoration(
+        hintText: 'Last name',
+        prefixIcon: Icon(IconlyLight.profile),
+      );
+
+  InputDecoration get _emailInputDecoration => const InputDecoration(
+        hintText: 'abc@email.com',
+        prefixIcon: Icon(IconlyLight.message),
+      );
+
+  InputDecoration get _passwordInputDecoration => InputDecoration(
+        hintText: 'Your password',
+        prefixIcon: const Icon(IconlyLight.profile),
+        suffixIcon: _buildShowPasswordButton,
+      );
+
+  InputDecoration get _confirmPasswordInputDecoration => InputDecoration(
+        hintText: 'Confirm password',
+        prefixIcon: const Icon(IconlyLight.profile),
+        suffixIcon: _buildShowPasswordButton,
+      );
+
   @override
   void initState() {
     _firstNameController = TextEditingController();
@@ -38,47 +65,30 @@ class _RegisterFormState extends State<RegisterForm> {
       children: [
         FundlTextField(
           controller: _firstNameController,
-          decoration: const InputDecoration(
-            hintText: 'First name',
-            prefixIcon: Icon(IconlyLight.profile),
-          ),
+          decoration: _firstNameInputDecoration,
         ),
         const SizedBox(height: 20.0),
         FundlTextField(
           controller: _lastNameController,
-          decoration: const InputDecoration(
-            hintText: 'Last name',
-            prefixIcon: Icon(IconlyLight.profile),
-          ),
+          decoration: _lastNameInputDecoration,
         ),
         const SizedBox(height: 20.0),
         FundlTextField(
           controller: _emailController,
-          decoration: const InputDecoration(
-            hintText: 'abc@email.com',
-            prefixIcon: Icon(IconlyLight.message),
-          ),
+          decoration: _emailInputDecoration,
           keyboardType: TextInputType.emailAddress,
         ),
         const SizedBox(height: 20.0),
         FundlTextField(
           controller: _passwordController,
           obscureText: !_showPassword,
-          decoration: InputDecoration(
-            hintText: 'Your password',
-            prefixIcon: const Icon(IconlyLight.profile),
-            suffixIcon: _buildShowPasswordButton,
-          ),
+          decoration: _passwordInputDecoration,
         ),
         const SizedBox(height: 20.0),
         FundlTextField(
           controller: _repeatPasswordController,
           obscureText: !_showPassword,
-          decoration: InputDecoration(
-            hintText: 'Confirm password',
-            prefixIcon: const Icon(IconlyLight.profile),
-            suffixIcon: _buildShowPasswordButton,
-          ),
+          decoration: _confirmPasswordInputDecoration,
         ),
         const SizedBox(height: 40.0),
         const Padding(

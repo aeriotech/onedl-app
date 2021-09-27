@@ -9,7 +9,7 @@ mixin FundlTextFieldMixin on TextField {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
           borderSide: const BorderSide(
-            color: AppTheme.grey,
+            color: AppTheme.lightGrey,
             width: 2.0,
           ),
         ),

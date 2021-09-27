@@ -29,6 +29,21 @@ class _LoginFormState extends State<LoginForm> {
         onPressed: _toggleShowPassword,
       );
 
+  InputDecoration get _emailInputDecoration => const InputDecoration(
+        hintText: 'abc@email.com',
+        prefixIcon: Icon(IconlyLight.message),
+      );
+
+  InputDecoration get _passwordInputDecoration => InputDecoration(
+        hintText: 'Your password',
+        prefixIcon: const Icon(IconlyLight.lock),
+        suffixIcon: _buildShowPasswordButton,
+      );
+
+  TextStyle get _forgotPasswordStyle => const TextStyle(
+        fontSize: 14.0,
+      );
+
   void _handleLogin() {
     if (widget.onLogin == null) return;
     widget.onLogin!(
@@ -57,21 +72,14 @@ class _LoginFormState extends State<LoginForm> {
       children: [
         FundlTextField(
           controller: _emailController,
-          decoration: const InputDecoration(
-            hintText: 'abc@email.com',
-            prefixIcon: Icon(IconlyLight.message),
-          ),
+          decoration: _emailInputDecoration,
           keyboardType: TextInputType.emailAddress,
           textInputAction: TextInputAction.continueAction,
         ),
         const SizedBox(height: 20.0),
         FundlTextField(
           controller: _passwordController,
-          decoration: InputDecoration(
-            hintText: 'Your password',
-            prefixIcon: const Icon(IconlyLight.lock),
-            suffixIcon: _buildShowPasswordButton,
-          ),
+          decoration: _passwordInputDecoration,
           keyboardType: TextInputType.text,
           obscureText: !_showPassword,
           textInputAction: TextInputAction.done,
@@ -81,12 +89,10 @@ class _LoginFormState extends State<LoginForm> {
           onTap: widget.onForgotPassword,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: const [
+            children: [
               Text(
-                'Forgot Password?',
-                style: TextStyle(
-                  fontSize: 14.0,
-                ),
+                'Forgor Password?',
+                style: _forgotPasswordStyle,
               ),
             ],
           ),
