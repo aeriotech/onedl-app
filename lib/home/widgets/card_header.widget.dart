@@ -3,11 +3,18 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:fundl_app/common/theme.dart';
 
 class CardHeader extends StatelessWidget {
-  const CardHeader({Key? key, required this.title, this.onClick, this.light = false}) : super(key: key);
+  const CardHeader({
+    Key? key,
+    required this.title,
+    this.onClick,
+    this.light = false,
+    this.showViewAll = true,
+  }) : super(key: key);
 
   final String title;
   final bool light;
   final VoidCallback? onClick;
+  final bool showViewAll;
 
   Color get _viewAllColor => light ? Colors.white.withOpacity(0.8) : AppTheme.grey;
 
@@ -39,20 +46,23 @@ class CardHeader extends StatelessWidget {
             style: _topDealsStyle,
           ),
           const Spacer(),
-          GestureDetector(
-            onTap: onClick,
-            child: Row(
-              children: [
-                Text(
-                  'View all',
-                  style: _viewAllStyle,
-                ),
-                Icon(
-                  IconlyLight.arrowRight2,
-                  color: _viewAllColor,
-                  size: 18.0,
-                ),
-              ],
+          Visibility(
+            visible: showViewAll,
+            child: GestureDetector(
+              onTap: onClick,
+              child: Row(
+                children: [
+                  Text(
+                    'View all',
+                    style: _viewAllStyle,
+                  ),
+                  Icon(
+                    IconlyLight.arrowRight2,
+                    color: _viewAllColor,
+                    size: 18.0,
+                  ),
+                ],
+              ),
             ),
           ),
         ],

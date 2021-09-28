@@ -29,7 +29,7 @@ class _SearchScreenState extends State<SearchScreen> {
           CategoryList(
             categories: tempCategories,
           ),
-          ShopList(),
+          const ShopList(),
         ],
       ),
     );

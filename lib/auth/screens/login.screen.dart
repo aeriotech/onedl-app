@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fundl_app/api/exceptions/bad_request.exception.dart';
+import 'package:fundl_app/api/exceptions/unauthorized.exception.dart';
+import 'package:fundl_app/auth/models/login.dto.dart';
 import 'package:fundl_app/auth/screens/forgot_password.screen.dart';
 import 'package:fundl_app/auth/screens/register.screen.dart';
+import 'package:fundl_app/auth/services/login.service.dart';
 import 'package:fundl_app/auth/widgets/login_form.widget.dart';
 import 'package:fundl_app/common/assets.dart';
 import 'package:fundl_app/home/screens/main.screen.dart';
@@ -13,8 +17,29 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void _handleLogin(String username, String password) {
-      Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
+    void _showErrorSnackbar(String message) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Center(
+            heightFactor: 1,
+            child: Text(message),
+          ),
+        ),
+      );
+    }
+
+    void _handleLogin(String username, String password) async {
+      try {
+        await LoginService.login(LoginDto(
+          username: username,
+          password: password,
+        ));
+        Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
+      } on BadRequestException {
+        _showErrorSnackbar('Please enter your username and password');
+      } on UnauthorizedException {
+        _showErrorSnackbar('Wrong username or password');
+      }
     }
 
     void _handleForgotPassword() {

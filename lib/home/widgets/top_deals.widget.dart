@@ -1,15 +1,36 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:fundl_app/common/assets.dart';
+import 'package:fundl_app/api/models/discount.model.dart';
 import 'package:fundl_app/coupon/screens/coupon.screen.dart';
 import 'package:fundl_app/home/widgets/card_header.widget.dart';
 
 class TopDeals extends StatelessWidget {
-  const TopDeals({Key? key}) : super(key: key);
+  const TopDeals({
+    Key? key,
+    required this.discounts,
+    this.loading = false,
+  }) : super(key: key);
+
+  final List<Discount> discounts;
+  final bool loading;
 
   void _handleViewAll() {}
 
-  void _handleOpen(BuildContext context) {
-    Navigator.of(context).pushNamed(CouponScreen.routeName);
+  void _handleOpen(BuildContext context, String uuid) {
+    Navigator.of(context).pushNamed(
+      CouponScreen.routeName,
+      arguments: CouponScreenArguments(uuid: uuid),
+    );
+  }
+
+  Widget _buildItem(BuildContext context, int i) {
+    final discount = discounts[i];
+    return GestureDetector(
+      onTap: () => _handleOpen(context, discount.uuid),
+      child: CachedNetworkImage(
+        imageUrl: discount.thumbnail.url,
+      ),
+    );
   }
 
   @override
@@ -26,31 +47,16 @@ class TopDeals extends StatelessWidget {
               title: '🔥  Top Deals',
               light: true,
               onClick: _handleViewAll,
+              showViewAll: false,
             ),
             SizedBox(
               height: 250.0,
-              child: ListView(
+              child: ListView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 15.0),
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
-                children: [
-                  GestureDetector(
-                    onTap: () => _handleOpen(context),
-                    child: Image.asset(AppAssets.placeholderWolt),
-                  ),
-                  GestureDetector(
-                    onTap: () => _handleOpen(context),
-                    child: Image.asset(AppAssets.placeholderMcFundl),
-                  ),
-                  GestureDetector(
-                    onTap: () => _handleOpen(context),
-                    child: Image.asset(AppAssets.placeholderWolt),
-                  ),
-                  GestureDetector(
-                    onTap: () => _handleOpen(context),
-                    child: Image.asset(AppAssets.placeholderMcFundl),
-                  ),
-                ],
+                itemCount: discounts.length,
+                itemBuilder: _buildItem,
               ),
             ),
             const SizedBox(height: 20.0),
