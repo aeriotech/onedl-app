@@ -47,27 +47,27 @@ class ProfileHeader extends StatelessWidget {
 
   Widget get _avatar => Stack(
         alignment: Alignment.topRight,
-        children: [
-          const CircleAvatar(
+        children: const [
+          CircleAvatar(
             radius: 70.0,
             backgroundColor: AppTheme.lightGrey,
             backgroundImage: AssetImage(AppAssets.placeholderProfilePicture),
           ),
-          Positioned(
-            top: 5.0,
-            right: 5.0,
-            child: GestureDetector(
-              onTap: _handleAdd,
-              child: const CircleAvatar(
-                backgroundColor: Colors.white,
-                child: Icon(
-                  Icons.add,
-                  color: Colors.black,
-                ),
-                radius: 16.0,
-              ),
-            ),
-          ),
+          // Positioned(
+          //   top: 5.0,
+          //   right: 5.0,
+          //   child: GestureDetector(
+          //     onTap: _handleAdd,
+          //     child: const CircleAvatar(
+          //       backgroundColor: Colors.white,
+          //       child: Icon(
+          //         Icons.add,
+          //         color: Colors.black,
+          //       ),
+          //       radius: 16.0,
+          //     ),
+          //   ),
+          // ),
         ],
       );
 
@@ -95,47 +95,45 @@ class ProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: Stack(
-        children: [
-          ClipPath(
-            clipper: TopCurve(),
-            child: const SquareBackground(),
-          ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const SizedBox(height: 100.0),
-              _avatar,
-              const SizedBox(height: 24.0),
-              Text(
-                name.toUpperCase(),
-                style: _nameStyle,
-              ),
-              Text(
-                '@$username',
-                style: _usernameStyle,
-              ),
-              const SizedBox(height: 15.0),
-              _info,
-              const SizedBox(height: 15.0),
-              _divider,
-            ],
-          ),
-          Positioned(
-            top: 40.0,
-            left: 10.0,
-            child: IconButton(
-              onPressed: () => _handleBack(context),
-              icon: const Icon(
-                IconlyLight.arrowLeft2,
-                color: Colors.white,
-                size: 32.0,
-              ),
+    return Stack(
+      children: [
+        ClipPath(
+          clipper: TopCurve(),
+          child: const SquareBackground(),
+        ),
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(height: 100.0),
+            _avatar,
+            const SizedBox(height: 24.0),
+            Text(
+              name.toUpperCase(),
+              style: _nameStyle,
             ),
-          )
-        ],
-      ),
+            Text(
+              '@$username',
+              style: _usernameStyle,
+            ),
+            const SizedBox(height: 15.0),
+            _info,
+            const SizedBox(height: 15.0),
+            _divider,
+          ],
+        ),
+        Positioned(
+          top: 40.0,
+          left: 10.0,
+          child: IconButton(
+            onPressed: () => _handleBack(context),
+            icon: const Icon(
+              IconlyLight.arrowLeft2,
+              color: Colors.white,
+              size: 32.0,
+            ),
+          ),
+        )
+      ],
     );
   }
 }

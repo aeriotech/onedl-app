@@ -35,7 +35,7 @@ class RegisterScreen extends StatelessWidget {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(30.0),
-          child: Column(
+          child: ListView(
             children: [
               const SizedBox(height: 100.0),
               Row(
@@ -53,6 +53,7 @@ class RegisterScreen extends StatelessWidget {
               RegisterForm(
                 onRegister: _handleRegister,
               ),
+              const SizedBox(height: 20.0),
               const Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
