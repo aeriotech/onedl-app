@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fundl_app/api/exceptions/bad_request.exception.dart';
+import 'package:fundl_app/api/exceptions/forbidden.exception.dart';
 import 'package:fundl_app/api/exceptions/unauthorized.exception.dart';
 import 'package:fundl_app/auth/models/login.dto.dart';
 import 'package:fundl_app/auth/screens/forgot_password.screen.dart';
+import 'package:fundl_app/auth/screens/loading.screen.dart';
 import 'package:fundl_app/auth/screens/register.screen.dart';
 import 'package:fundl_app/auth/services/login.service.dart';
 import 'package:fundl_app/auth/widgets/login_form.widget.dart';
@@ -28,17 +30,16 @@ class LoginScreen extends StatelessWidget {
       );
     }
 
-    void _handleLogin(String username, String password) async {
+    void _handleLogin(LoginDto loginDto) async {
       try {
-        await LoginService.login(LoginDto(
-          username: username,
-          password: password,
-        ));
-        Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
+        await LoginService.login(loginDto);
+        Navigator.of(context).pushReplacementNamed(LoadingScreen.routeName);
       } on BadRequestException {
         _showErrorSnackbar('Please enter your username and password');
       } on UnauthorizedException {
         _showErrorSnackbar('Wrong username or password');
+      } on ForbiddenException {
+        _showErrorSnackbar('You didn\'t confirm your email');
       }
     }
 

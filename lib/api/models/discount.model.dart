@@ -40,14 +40,12 @@ class Discount {
 
   static Future<Discount> getDiscount(String uuid) async {
     final response = await API.client.get('/discounts/$uuid');
-
     final discount = Discount.fromJson(response.data);
     return discount;
   }
 
   static Future<List<Discount>> getDiscounts() async {
     final response = await API.client.get('/discounts');
-
     final jsonList = List.from(response.data);
     final discounts = jsonList.map((json) => Discount.fromJson(json)).toList();
     return discounts;

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fundl_app/api/exceptions/bad_request.exception.dart';
+import 'package:fundl_app/api/exceptions/forbidden.exception.dart';
 import 'package:fundl_app/api/exceptions/unauthorized.exception.dart';
 import 'package:fundl_app/auth/models/login.dto.dart';
 import 'package:fundl_app/auth/models/login.response.dart';
@@ -33,8 +34,10 @@ class LoginService {
           throw BadRequestException(e.message);
         case 401:
           throw UnauthorizedException(e.message);
+        case 403:
+          throw ForbiddenException(e.message);
         default:
-          throw HttpException(e.message);
+          rethrow;
       }
     }
   }
@@ -60,5 +63,9 @@ class LoginService {
 
   static Future<bool> isLoggedIn() {
     return storage.containsKey(key: 'token');
+  }
+
+  static logout() async {
+    await storage.delete(key: 'token');
   }
 }

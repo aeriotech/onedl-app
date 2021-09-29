@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:fundl_app/auth/models/login.dto.dart';
 import 'package:fundl_app/common/widgets/text_field.widget.dart';
 import 'package:fundl_app/common/widgets/text_icon_button.widgets.dart';
 
@@ -10,7 +11,7 @@ class LoginForm extends StatefulWidget {
     this.onForgotPassword,
   }) : super(key: key);
 
-  final Function(String, String)? onLogin;
+  final Function(LoginDto)? onLogin;
   final VoidCallback? onForgotPassword;
 
   @override
@@ -18,7 +19,7 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
-  late final TextEditingController _emailController, _passwordController;
+  late final TextEditingController _usernameController, _passwordController;
 
   bool _showPassword = false;
   void _toggleShowPassword() => setState(() => _showPassword = !_showPassword);
@@ -29,13 +30,13 @@ class _LoginFormState extends State<LoginForm> {
         onPressed: _toggleShowPassword,
       );
 
-  InputDecoration get _emailInputDecoration => const InputDecoration(
-        hintText: 'abc@email.com',
-        prefixIcon: Icon(IconlyLight.message),
+  InputDecoration get _usernameInputDecoration => const InputDecoration(
+        hintText: 'Username',
+        prefixIcon: Icon(IconlyLight.profile),
       );
 
   InputDecoration get _passwordInputDecoration => InputDecoration(
-        hintText: 'Your password',
+        hintText: 'Password',
         prefixIcon: const Icon(IconlyLight.lock),
         suffixIcon: _buildShowPasswordButton,
       );
@@ -46,22 +47,22 @@ class _LoginFormState extends State<LoginForm> {
 
   void _handleLogin() {
     if (widget.onLogin == null) return;
-    widget.onLogin!(
-      _emailController.text,
-      _passwordController.text,
-    );
+    widget.onLogin!(LoginDto(
+      username: _usernameController.text,
+      password: _passwordController.text,
+    ));
   }
 
   @override
   void initState() {
-    _emailController = TextEditingController();
+    _usernameController = TextEditingController();
     _passwordController = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
-    _emailController.dispose();
+    _usernameController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -71,8 +72,8 @@ class _LoginFormState extends State<LoginForm> {
     return Column(
       children: [
         FundlTextField(
-          controller: _emailController,
-          decoration: _emailInputDecoration,
+          controller: _usernameController,
+          decoration: _usernameInputDecoration,
           keyboardType: TextInputType.emailAddress,
           textInputAction: TextInputAction.continueAction,
         ),

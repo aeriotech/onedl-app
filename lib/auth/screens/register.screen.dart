@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fundl_app/api/exceptions/conflict.exception.dart';
+import 'package:fundl_app/auth/models/register.dto.dart';
+import 'package:fundl_app/auth/screens/email_confirmation.screen.dart';
+import 'package:fundl_app/auth/services/register.service.dart';
 import 'package:fundl_app/auth/widgets/register_form.widget.dart';
 
 import 'login.screen.dart';
@@ -10,6 +14,19 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void _handleRegister(RegisterDto registerDto) async {
+      try {
+        await RegisterService.register(registerDto);
+        Navigator.of(context).pushReplacementNamed(EmailConfirmation.routeName);
+      } on ConflictException catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.message),
+          ),
+        );
+      }
+    }
+
     void _handleRedirectSignIn() {
       Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
     }
@@ -33,7 +50,9 @@ class RegisterScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20.0),
-              const RegisterForm(),
+              RegisterForm(
+                onRegister: _handleRegister,
+              ),
               const Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

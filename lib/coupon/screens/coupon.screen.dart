@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:fundl_app/api/models/coupon.model.dart';
@@ -32,26 +33,37 @@ class CouponScreen extends StatelessWidget {
     switch (discount.couponType) {
       case CouponType.code:
         if (coupon == null) {
-          _handleGenerateCoupon(discount, callback);
+          _generateCoupon(discount, callback);
+        } else {
+          _copyCoupon(context, coupon);
         }
         break;
       case CouponType.url:
         if (coupon != null) {
-          _handleOpenUrl(context, coupon);
+          _openUrl(context, coupon);
         }
         break;
     }
     // Navigator.of(context).pop();
   }
 
-  void _handleGenerateCoupon(Discount discount, Function(Coupon)? callback) async {
+  void _generateCoupon(Discount discount, Function(Coupon)? callback) async {
     final coupon = await discount.generate();
     if (callback != null) {
       callback(coupon);
     }
   }
 
-  void _handleOpenUrl(BuildContext context, Coupon coupon) async {
+  void _copyCoupon(BuildContext context, Coupon coupon) async {
+    await Clipboard.setData(ClipboardData(text: coupon.code));
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Copied to clipboard'),
+      ),
+    );
+  }
+
+  void _openUrl(BuildContext context, Coupon coupon) async {
     if (await canLaunch(coupon.code)) {
       await launch(coupon.code);
     }
@@ -113,43 +125,46 @@ class CouponScreen extends StatelessWidget {
                         ),
                       ),
                       const Spacer(),
-                      StatefulBuilder(
-                        builder: (context, setState) => FutureBuilder<List<Coupon>>(
-                          future: Coupon.getCoupons(),
-                          builder: (context, snapshot) {
-                            final coupons = snapshot.data;
+                      FutureBuilder<List<Coupon>>(
+                        future: Coupon.getCoupons(),
+                        builder: (context, snapshot) {
+                          final coupons = snapshot.data;
 
-                            if (coupons == null) {
-                              return TextIconButton(
-                                text: _buildButtonText(discount).toUpperCase(),
-                              );
-                            }
-
-                            final filtered = coupons.where((coupon) => coupon.discountUuid == discount.uuid).toList();
-
-                            String buttonText;
-                            switch (discount.couponType) {
-                              case CouponType.code:
-                                buttonText = filtered.isNotEmpty ? filtered.first.code : _buildButtonText(discount).toUpperCase();
-                                break;
-
-                              default:
-                                buttonText = _buildButtonText(discount).toUpperCase();
-                                break;
-                            }
-
+                          if (coupons == null) {
                             return TextIconButton(
-                              text: buttonText,
-                              icon: IconlyLight.arrowRight,
-                              onClick: () => _handleClick(
-                                context,
-                                discount,
-                                filtered.isNotEmpty ? filtered.first : null,
-                                (coupon) => setState(() => buttonText = coupon.code),
-                              ),
+                              text: _buildButtonText(discount),
                             );
-                          },
-                        ),
+                          }
+
+                          final filtered = coupons.where((coupon) => coupon.discountUuid == discount.uuid).toList();
+
+                          String buttonText = _buildButtonText(discount);
+
+                          Coupon? coupon = filtered.isNotEmpty ? filtered.first : null;
+
+                          return StatefulBuilder(
+                            builder: (context, setState) {
+                              switch (discount.couponType) {
+                                case CouponType.code:
+                                  buttonText = coupon?.code ?? _buildButtonText(discount);
+                                  break;
+
+                                case CouponType.url:
+                                  break;
+                              }
+                              return TextIconButton(
+                                text: buttonText.toUpperCase(),
+                                icon: IconlyLight.arrowRight,
+                                onClick: () => _handleClick(
+                                  context,
+                                  discount,
+                                  filtered.isNotEmpty ? filtered.first : null,
+                                  (c) => setState(() => coupon = c),
+                                ),
+                              );
+                            },
+                          );
+                        },
                       ),
                     ],
                   ),
