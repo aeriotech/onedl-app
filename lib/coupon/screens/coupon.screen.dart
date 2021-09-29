@@ -110,14 +110,15 @@ class CouponScreen extends StatelessWidget {
 
             return Stack(
               children: [
-                Positioned(
-                  top: 50.0,
-                  left: 50.0,
-                  child: CachedNetworkImage(
-                    imageUrl: discount.shop!.logo.url,
-                    height: 50.0,
+                if (discount.shop!.logo != null)
+                  Positioned(
+                    top: 50.0,
+                    left: 50.0,
+                    child: CachedNetworkImage(
+                      imageUrl: discount.shop!.logo!.url,
+                      height: 50.0,
+                    ),
                   ),
-                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 50.0),
                   child: Column(

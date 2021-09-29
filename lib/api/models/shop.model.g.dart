@@ -7,7 +7,9 @@ part of 'shop.model.dart';
 // **************************************************************************
 
 Shop _$ShopFromJson(Map<String, dynamic> json) => Shop(
-      logo: PublicFile.fromJson(json['logo'] as Map<String, dynamic>),
+      logo: json['logo'] == null
+          ? null
+          : PublicFile.fromJson(json['logo'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ShopToJson(Shop instance) => <String, dynamic>{

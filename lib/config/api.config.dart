@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-const apiUrl = 'http://localhost:4000';
+const apiUrl = 'https://api.fundl.io';
 
 class API {
   static Dio client = Dio(

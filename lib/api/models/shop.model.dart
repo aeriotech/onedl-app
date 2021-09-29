@@ -9,7 +9,7 @@ class Shop {
     required this.logo,
   });
 
-  final PublicFile logo;
+  final PublicFile? logo;
 
   factory Shop.fromJson(Map<String, dynamic> json) => _$ShopFromJson(json);
 
