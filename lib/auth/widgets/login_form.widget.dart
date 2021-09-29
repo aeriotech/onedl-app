@@ -75,7 +75,7 @@ class _LoginFormState extends State<LoginForm> {
           controller: _usernameController,
           decoration: _usernameInputDecoration,
           keyboardType: TextInputType.emailAddress,
-          textInputAction: TextInputAction.continueAction,
+          textInputAction: TextInputAction.next,
         ),
         const SizedBox(height: 20.0),
         FundlTextField(

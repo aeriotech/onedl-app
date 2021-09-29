@@ -54,7 +54,6 @@ class RegisterScreen extends StatelessWidget {
                 onRegister: _handleRegister,
               ),
               const SizedBox(height: 20.0),
-              const Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

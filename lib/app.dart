@@ -20,6 +20,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       initialRoute: LoadingScreen.routeName,
+      debugShowCheckedModeBanner: false,
       theme: AppTheme.getDefault(),
       routes: {
         LoadingScreen.routeName: (context) => const LoadingScreen(),
