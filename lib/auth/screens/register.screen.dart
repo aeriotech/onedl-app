@@ -17,7 +17,7 @@ class RegisterScreen extends StatelessWidget {
     void _handleRegister(RegisterDto registerDto) async {
       try {
         await RegisterService.register(registerDto);
-        Navigator.of(context).pushReplacementNamed(EmailConfirmation.routeName);
+        Navigator.of(context).pushReplacementNamed(EmailConfirmationScreen.routeName);
       } on ConflictException catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(

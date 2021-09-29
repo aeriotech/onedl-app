@@ -3,10 +3,10 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:fundl_app/auth/screens/login.screen.dart';
 import 'package:fundl_app/common/widgets/text_icon_button.widgets.dart';
 
-class EmailConfirmation extends StatelessWidget {
+class EmailConfirmationScreen extends StatelessWidget {
   static const routeName = '/confirm';
 
-  const EmailConfirmation({Key? key}) : super(key: key);
+  const EmailConfirmationScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

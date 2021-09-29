@@ -1,3 +1,7 @@
+import 'package:dio/dio.dart';
+import 'package:fundl_app/api/exceptions/api/age_limit.exception.dart';
+import 'package:fundl_app/api/exceptions/api/coupon_limit.exception.dart';
+import 'package:fundl_app/api/exceptions/forbidden.exception.dart';
 import 'package:fundl_app/api/models/coupon.model.dart';
 import 'package:fundl_app/api/models/public_file.model.dart';
 import 'package:fundl_app/config/api.config.dart';
@@ -52,9 +56,24 @@ class Discount {
   }
 
   Future<Coupon> generate() async {
-    final response = await API.client.post('/discounts/$uuid/generate');
+    try {
+      final response = await API.client.post('/discounts/$uuid/generate');
 
-    final coupon = Coupon.fromJson(response.data);
-    return coupon;
+      final coupon = Coupon.fromJson(response.data);
+      return coupon;
+    } on DioError catch (e) {
+      final message = e.response?.data['message'];
+      switch (e.response?.statusCode) {
+        case 403:
+          switch (e.response?.data['error']) {
+            case 'age_limit':
+              throw AgeLimitException(message);
+            case 'coupon_limit':
+              throw CouponLimitException(message);
+          }
+          throw ForbiddenException(message);
+      }
+      rethrow;
+    }
   }
 }

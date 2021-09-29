@@ -1,3 +1,7 @@
+import 'package:dio/dio.dart';
+import 'package:fundl_app/api/exceptions/bad_request.exception.dart';
+import 'package:fundl_app/api/exceptions/conflict.exception.dart';
+import 'package:fundl_app/api/exceptions/not_found.exception.dart';
 import 'package:fundl_app/api/models/profile.model.dart';
 import 'package:fundl_app/config/api.config.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -36,5 +40,21 @@ class User {
     final user = User.fromJson(response.data);
 
     return user;
+  }
+
+  static Future<void> confirmAge(String emso) async {
+    try {
+      await API.client.post('/age-confirmation/emso/$emso');
+    } on DioError catch (e) {
+      switch (e.response?.statusCode) {
+        case 400:
+          throw BadRequestException(e.message);
+        case 404:
+          throw NotFoundException(e.message);
+        case 409:
+          throw ConflictException(e.message);
+      }
+      rethrow;
+    }
   }
 }

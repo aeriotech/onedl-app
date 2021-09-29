@@ -1,14 +1,16 @@
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:motion_tab_bar_v2/motion-badge.widget.dart';
+import 'package:motion_tab_bar_v2/motion-tab-bar.dart';
 
 class NavigationBar extends StatefulWidget {
   const NavigationBar({
     Key? key,
+    required this.labels,
     required this.controller,
     required this.icons,
   }) : super(key: key);
 
+  final List<String> labels;
   final List<IconData> icons;
   final PageController controller;
 
@@ -17,28 +19,28 @@ class NavigationBar extends StatefulWidget {
 }
 
 class _NavigationBarState extends State<NavigationBar> {
-  int _currentIndex = 0;
-
   void _handleOnTap(int index) {
     widget.controller.animateToPage(
       index,
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );
-    setState(() => _currentIndex = index);
   }
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBottomNavigationBar(
-      icons: const [
-        IconlyBold.home,
-        IconlyBold.notification,
-        IconlyBold.location,
-        IconlyBold.profile,
+    return MotionTabBar(
+      icons: widget.icons,
+      labels: widget.labels,
+      initialSelectedTab: widget.labels.first,
+      onTabItemSelected: _handleOnTap,
+      badges: const [
+        MotionBadgeWidget(),
+        MotionBadgeWidget(
+          isIndicator: true,
+          size: 8.0,
+        ),
       ],
-      activeIndex: _currentIndex,
-      onTap: _handleOnTap,
     );
   }
 }

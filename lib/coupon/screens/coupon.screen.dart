@@ -4,8 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:fundl_app/api/exceptions/api/age_limit.exception.dart';
+import 'package:fundl_app/api/exceptions/api/coupon_limit.exception.dart';
+import 'package:fundl_app/api/exceptions/forbidden.exception.dart';
 import 'package:fundl_app/api/models/coupon.model.dart';
 import 'package:fundl_app/api/models/discount.model.dart';
+import 'package:fundl_app/auth/screens/age_confirmation.screen.dart';
 import 'package:fundl_app/common/widgets/text_icon_button.widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -33,7 +37,7 @@ class CouponScreen extends StatelessWidget {
     switch (discount.couponType) {
       case CouponType.code:
         if (coupon == null) {
-          _generateCoupon(discount, callback);
+          _generateCoupon(context, discount, callback);
         } else {
           _copyCoupon(context, coupon);
         }
@@ -44,13 +48,22 @@ class CouponScreen extends StatelessWidget {
         }
         break;
     }
-    // Navigator.of(context).pop();
   }
 
-  void _generateCoupon(Discount discount, Function(Coupon)? callback) async {
-    final coupon = await discount.generate();
-    if (callback != null) {
-      callback(coupon);
+  void _generateCoupon(BuildContext context, Discount discount, Function(Coupon)? callback) async {
+    try {
+      final coupon = await discount.generate();
+      if (callback != null) {
+        callback(coupon);
+      }
+    } on AgeLimitException {
+      Navigator.of(context).pushNamed(AgeConfirmationScreen.routeName);
+    } on CouponLimitException {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('You can\'t claim any more coupons'),
+        ),
+      );
     }
   }
 
@@ -158,7 +171,7 @@ class CouponScreen extends StatelessWidget {
                                 onClick: () => _handleClick(
                                   context,
                                   discount,
-                                  filtered.isNotEmpty ? filtered.first : null,
+                                  coupon,
                                   (c) => setState(() => coupon = c),
                                 ),
                               );

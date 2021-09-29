@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:fundl_app/chat/screens/chat.screen.dart';
 import 'package:fundl_app/home/screens/home.screen.dart';
 import 'package:fundl_app/home/widgets/navigation_bar.widget.dart';
-import 'package:fundl_app/search/screens/search.screen.dart';
 
 class MainScreen extends StatelessWidget {
   static const routeName = '/main';
@@ -11,16 +11,23 @@ class MainScreen extends StatelessWidget {
 
   final PageController _controller = PageController(initialPage: 0);
 
+  final _labels = [
+    'Home',
+    'Chat',
+  ];
+
   final _icons = [
     IconlyBold.home,
-    IconlyBold.notification,
-    IconlyBold.location,
-    IconlyBold.profile,
+    IconlyBold.chat,
+    // IconlyBold.notification,
+    // IconlyBold.location,
+    // IconlyBold.profile,
   ];
 
   final _screens = const [
     HomeScreen(),
-    SearchScreen(),
+    ChatScreen(),
+    // SearchScreen(),
   ];
 
   @override
@@ -35,6 +42,7 @@ class MainScreen extends StatelessWidget {
       bottomNavigationBar: NavigationBar(
         controller: _controller,
         icons: _icons,
+        labels: _labels,
       ),
     );
   }

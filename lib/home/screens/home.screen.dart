@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fundl_app/api/models/discount.model.dart';
 import 'package:fundl_app/common/widgets/header.widget.dart';
+import 'package:fundl_app/home/widgets/social.widget.dart';
 import 'package:fundl_app/home/widgets/top_deals.widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -21,6 +22,7 @@ class HomeScreen extends StatelessWidget {
           },
         ),
         // const MyCoupons(),
+        const Social(),
       ],
     );
   }
