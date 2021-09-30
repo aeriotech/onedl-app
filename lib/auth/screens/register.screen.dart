@@ -67,7 +67,7 @@ class RegisterScreen extends StatelessWidget {
                   GestureDetector(
                     onTap: _handleRedirectSignIn,
                     child: Text(
-                      'Sign Up',
+                      'Sign In',
                       style: TextStyle(
                         fontSize: 15.0,
                         color: Colors.blue.shade800,
