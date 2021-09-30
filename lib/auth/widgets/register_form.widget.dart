@@ -4,6 +4,8 @@ import 'package:fundl_app/auth/models/register.dto.dart';
 import 'package:fundl_app/common/widgets/text_field.widget.dart';
 import 'package:fundl_app/common/widgets/text_icon_button.widgets.dart';
 
+import 'checkbox_text.widget.dart';
+
 class RegisterForm extends StatefulWidget {
   const RegisterForm({
     Key? key,
@@ -19,7 +21,17 @@ class RegisterForm extends StatefulWidget {
 class _RegisterFormState extends State<RegisterForm> {
   late final TextEditingController _usernameController, _firstNameController, _lastNameController, _emailController, _passwordController, _repeatPasswordController;
 
+  bool ageConfirmed = false;
+
   void _handleRegister() {
+    if (!ageConfirmed) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please check the box to continue'),
+        ),
+      );
+      return;
+    }
     final registerDto = RegisterDto(
       firstName: _firstNameController.text,
       lastName: _lastNameController.text,
@@ -34,6 +46,8 @@ class _RegisterFormState extends State<RegisterForm> {
 
   bool _showPassword = false;
   void _toggleShowPassword() => setState(() => _showPassword = !_showPassword);
+
+  _setAgeConfirmed(bool? value) => setState(() => ageConfirmed = value ?? false);
 
   Widget get _buildShowPasswordButton => IconButton(
         splashRadius: 16.0,
@@ -57,7 +71,7 @@ class _RegisterFormState extends State<RegisterForm> {
       );
 
   InputDecoration get _emailInputDecoration => const InputDecoration(
-        hintText: 'abc@email.com',
+        hintText: 'Email',
         prefixIcon: Icon(IconlyLight.message),
       );
 
@@ -121,7 +135,13 @@ class _RegisterFormState extends State<RegisterForm> {
             obscureText: !_showPassword,
             decoration: _confirmPasswordInputDecoration,
           ),
-          const SizedBox(height: 40.0),
+          const SizedBox(height: 20.0),
+          CheckboxText(
+            text: 'I am between 15 and 25 years old',
+            value: ageConfirmed,
+            onChanged: _setAgeConfirmed,
+          ),
+          const SizedBox(height: 20.0),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40.0),
             child: TextIconButton(

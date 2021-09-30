@@ -92,7 +92,7 @@ class _LoginFormState extends State<LoginForm> {
         //     mainAxisAlignment: MainAxisAlignment.end,
         //     children: [
         //       Text(
-        //         'Forgor Password?',
+        //         'Forgot Password?',
         //         style: _forgotPasswordStyle,
         //       ),
         //     ],

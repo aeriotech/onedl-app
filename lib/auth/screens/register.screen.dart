@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fundl_app/api/exceptions/bad_request.exception.dart';
 import 'package:fundl_app/api/exceptions/conflict.exception.dart';
 import 'package:fundl_app/auth/models/register.dto.dart';
 import 'package:fundl_app/auth/screens/email_confirmation.screen.dart';
@@ -18,6 +19,12 @@ class RegisterScreen extends StatelessWidget {
       try {
         await RegisterService.register(registerDto);
         Navigator.of(context).pushReplacementNamed(EmailConfirmationScreen.routeName);
+      } on BadRequestException {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Please enter all fields'),
+          ),
+        );
       } on ConflictException catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
