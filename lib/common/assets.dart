@@ -1,5 +1,6 @@
 class AppAssets {
   static const textLogo = 'assets/text_logo.svg';
+  static const logo = 'assets/logo.png';
   static const discordLogo = 'assets/discord.svg';
   static const instagramLogo = 'assets/instagram.png';
   static const tiktokLogo = 'assets/tiktok.png';
@@ -9,4 +10,5 @@ class AppAssets {
   static const placeholderPhone = 'assets/phone_placeholder.jpeg';
   static const placeholderLogo = 'assets/placeholder_mcdonalds_logo.png';
   static const placeholderCoupon = 'assets/placeholder_coupon.png';
+  static const chatPreview = 'assets/chat_preview.png';
 }

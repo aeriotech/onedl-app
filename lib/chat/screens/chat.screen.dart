@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fundl_app/chat/widgets/chat_background.dart';
 import 'package:fundl_app/common/assets.dart';
 
 class ChatScreen extends StatelessWidget {
@@ -7,18 +8,15 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SvgPicture.asset(
-          AppAssets.textLogo,
-          height: 30.0,
-        ),
-        const SizedBox(height: 10.0),
-        const Text(
-          'Coming soon',
-          style: TextStyle(
-            fontSize: 36.0,
+    return Stack(
+      children: const [
+        ChatBackground(),
+        Center(
+          child: Text(
+            'Coming soon',
+            style: TextStyle(
+              fontSize: 36.0,
+            ),
           ),
         ),
       ],

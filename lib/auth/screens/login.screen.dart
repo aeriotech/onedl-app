@@ -10,7 +10,6 @@ import 'package:fundl_app/auth/screens/register.screen.dart';
 import 'package:fundl_app/auth/services/login.service.dart';
 import 'package:fundl_app/auth/widgets/login_form.widget.dart';
 import 'package:fundl_app/common/assets.dart';
-import 'package:fundl_app/home/screens/main.screen.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeName = '/login';
@@ -59,7 +58,7 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 100.0),
-              SvgPicture.asset(AppAssets.textLogo),
+              Image.asset(AppAssets.logo),
               const SizedBox(height: 70.0),
               Row(
                 children: const [
