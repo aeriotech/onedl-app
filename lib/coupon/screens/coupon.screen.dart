@@ -10,6 +10,7 @@ import 'package:fundl_app/api/exceptions/forbidden.exception.dart';
 import 'package:fundl_app/api/models/coupon.model.dart';
 import 'package:fundl_app/api/models/discount.model.dart';
 import 'package:fundl_app/auth/screens/age_confirmation.screen.dart';
+import 'package:fundl_app/common/widgets/back_button.widget.dart';
 import 'package:fundl_app/common/widgets/text_icon_button.widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -27,6 +28,10 @@ class CouponScreen extends StatelessWidget {
         fontSize: 24.0,
         fontWeight: FontWeight.bold,
       );
+
+  void _handleBack(BuildContext context) {
+    Navigator.of(context).pop();
+  }
 
   void _handleClick(
     BuildContext context,
@@ -110,6 +115,10 @@ class CouponScreen extends StatelessWidget {
 
             return Stack(
               children: [
+                ScreenBackButton(
+                  color: Colors.black,
+                  onClick: () => _handleBack(context),
+                ),
                 if (discount.shop!.logo != null)
                   Positioned(
                     top: 50.0,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:fundl_app/common/assets.dart';
 import 'package:fundl_app/common/theme.dart';
+import 'package:fundl_app/common/widgets/back_button.widget.dart';
 import 'package:fundl_app/profile/widgets/square_background.widget.dart';
 import 'package:fundl_app/profile/widgets/curve_clipper.widget.dart';
 
@@ -121,18 +121,10 @@ class ProfileHeader extends StatelessWidget {
             _divider,
           ],
         ),
-        Positioned(
-          top: 40.0,
-          left: 10.0,
-          child: IconButton(
-            onPressed: () => _handleBack(context),
-            icon: const Icon(
-              IconlyLight.arrowLeft2,
-              color: Colors.white,
-              size: 32.0,
-            ),
-          ),
-        )
+        ScreenBackButton(
+          color: Colors.white,
+          onClick: () => _handleBack(context),
+        ),
       ],
     );
   }
