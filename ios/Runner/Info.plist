@@ -26,6 +26,7 @@
 	<array>
 		<string>https</string>
 		<string>http</string>
+		<string>gmalite</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -48,5 +49,6 @@
 	<false/>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	
 </dict>
 </plist>

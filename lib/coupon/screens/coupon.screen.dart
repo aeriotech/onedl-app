@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:android_intent_plus/flag.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -79,19 +81,34 @@ class CouponScreen extends StatelessWidget {
     showSnackBar(context, 'Copied to clipboard');
   }
 
+  void _showError(BuildContext context, bool http) {
+    if (http) {
+      showSnackBar(context, 'There was an error opening the website');
+    } else {
+      showSnackBar(context, 'Please install the app');
+    }
+  }
+
   void _openUrl(BuildContext context, Coupon coupon) async {
-    try {
-      final intent = AndroidIntent(
-        action: 'action_view',
-        data: coupon.code,
-      );
-      await intent.launch();
-    } catch (e) {
-      if (isHttp(coupon.code)) {
-        showSnackBar(context, 'There was an error opening the website');
-      } else {
-        showSnackBar(context, 'Please install the app');
+    final httpSchema = isHttp(coupon.code);
+    if (Platform.isAndroid) {
+      try {
+        final intent = AndroidIntent(
+          action: 'action_view',
+          data: coupon.code,
+        );
+        await intent.launch();
+      } catch (e) {
+        _showError(context, httpSchema);
       }
+    } else if (Platform.isIOS) {
+      if (await canLaunch(coupon.code)) {
+        await launch(coupon.code);
+      } else {
+        _showError(context, httpSchema);
+      }
+    } else {
+      showSnackBar(context, 'Unsupported platform');
     }
   }
 
