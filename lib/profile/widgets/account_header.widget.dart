@@ -17,7 +17,7 @@ class ProfileHeader extends StatelessWidget {
   final String name, username;
   final int friendCount, coinCount;
 
-  void _handleAdd() {}
+  // void _handleAdd() {}
 
   void _handleBack(BuildContext context) {
     Navigator.of(context).pop();

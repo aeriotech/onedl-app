@@ -4,7 +4,6 @@ import 'package:fundl_app/api/models/user.model.dart';
 import 'package:fundl_app/auth/services/login.service.dart';
 import 'package:fundl_app/common/widgets/text_icon_button.widgets.dart';
 import 'package:fundl_app/profile/widgets/account_header.widget.dart';
-import 'package:fundl_app/profile/widgets/action_menu.widget.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const routeName = '/profile';

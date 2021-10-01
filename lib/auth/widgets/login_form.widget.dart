@@ -41,9 +41,9 @@ class _LoginFormState extends State<LoginForm> {
         suffixIcon: _buildShowPasswordButton,
       );
 
-  TextStyle get _forgotPasswordStyle => const TextStyle(
-        fontSize: 14.0,
-      );
+  // TextStyle get _forgotPasswordStyle => const TextStyle(
+  //       fontSize: 14.0,
+  //     );
 
   void _handleLogin() {
     if (widget.onLogin == null) return;

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:fundl_app/api/exceptions/bad_request.exception.dart';
 import 'package:fundl_app/api/exceptions/forbidden.exception.dart';
 import 'package:fundl_app/api/exceptions/unauthorized.exception.dart';
@@ -12,7 +11,6 @@ import 'package:fundl_app/auth/screens/register.screen.dart';
 import 'package:fundl_app/auth/services/login.service.dart';
 import 'package:fundl_app/auth/widgets/login_form.widget.dart';
 import 'package:fundl_app/common/assets.dart';
-import 'package:fundl_app/config/api.config.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeName = '/login';
@@ -35,7 +33,6 @@ class LoginScreen extends StatelessWidget {
     void _handleLogin(LoginDto loginDto) async {
       try {
         await LoginService.login(loginDto);
-        print(API.client.options.headers['authentication']);
         final user = await User.me();
         if (!user.ageConfirmed) {
           await Navigator.of(context).pushNamed(AgeConfirmationScreen.routeName);
