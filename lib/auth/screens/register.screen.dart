@@ -44,7 +44,7 @@ class RegisterScreen extends StatelessWidget {
           padding: const EdgeInsets.all(30.0),
           child: ListView(
             children: [
-              const SizedBox(height: 100.0),
+              const SizedBox(height: 80.0),
               Row(
                 children: const [
                   Text(

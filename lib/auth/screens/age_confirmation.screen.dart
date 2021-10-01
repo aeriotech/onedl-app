@@ -19,35 +19,39 @@ class AgeConfirmationScreen extends StatelessWidget {
     prefixIcon: Icon(IconlyLight.document),
   );
 
+  void _handleConfirmAge(BuildContext context) async {
+    try {
+      await User.confirmAge(_ageController.text);
+      if (Navigator.of(context).canPop()) {
+        Navigator.of(context).pop();
+      }
+    } on BadRequestException {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please enter a valid EMŠO'),
+        ),
+      );
+    } on ConflictException {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('User with this EMŠO already exists'),
+        ),
+      );
+    } on NotFoundException {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please enter an EMŠO'),
+        ),
+      );
+    }
+  }
+
+  void _handleSkip(BuildContext context) {
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
-    void _handleConfirmAge() async {
-      try {
-        await User.confirmAge(_ageController.text);
-        if (Navigator.of(context).canPop()) {
-          Navigator.of(context).pop();
-        }
-      } on BadRequestException {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Please enter a valid EMŠO'),
-          ),
-        );
-      } on ConflictException {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('User with this EMŠO already exists'),
-          ),
-        );
-      } on NotFoundException {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Please enter an EMŠO'),
-          ),
-        );
-      }
-    }
-
     return Scaffold(
       body: Center(
         child: Padding(
@@ -81,7 +85,14 @@ class AgeConfirmationScreen extends StatelessWidget {
                 child: TextIconButton(
                   text: 'SUBMIT',
                   icon: IconlyLight.arrowRight,
-                  onClick: _handleConfirmAge,
+                  onClick: () => _handleConfirmAge(context),
+                ),
+              ),
+              const SizedBox(height: 20.0),
+              Center(
+                child: GestureDetector(
+                  onTap: () => _handleSkip(context),
+                  child: const Text('Skip'),
                 ),
               ),
             ],

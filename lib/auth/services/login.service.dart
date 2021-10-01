@@ -24,10 +24,7 @@ class LoginService {
 
       final loginResponse = LoginResponse.fromJson(response.data);
 
-      await storage.write(
-        key: 'token',
-        value: loginResponse.accessToken,
-      );
+      await saveToken(loginResponse.accessToken);
     } on DioError catch (e) {
       switch (e.response?.statusCode) {
         case 400:
@@ -42,7 +39,7 @@ class LoginService {
     }
   }
 
-  static void saveToken(String token) async {
+  static Future<void> saveToken(String token) async {
     await storage.write(
       key: 'token',
       value: token,
