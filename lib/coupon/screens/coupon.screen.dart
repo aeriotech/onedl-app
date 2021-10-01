@@ -1,17 +1,19 @@
+import 'package:android_intent_plus/android_intent.dart';
+import 'package:android_intent_plus/flag.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:fundl_app/api/exceptions/api/age_limit.exception.dart';
 import 'package:fundl_app/api/exceptions/api/coupon_limit.exception.dart';
-import 'package:fundl_app/api/exceptions/forbidden.exception.dart';
 import 'package:fundl_app/api/models/coupon.model.dart';
 import 'package:fundl_app/api/models/discount.model.dart';
 import 'package:fundl_app/auth/screens/age_confirmation.screen.dart';
 import 'package:fundl_app/common/widgets/back_button.widget.dart';
 import 'package:fundl_app/common/widgets/text_icon_button.widgets.dart';
+import 'package:fundl_app/utils/snackbar.utils.dart';
+import 'package:fundl_app/utils/url.utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CouponScreenArguments {
@@ -74,16 +76,22 @@ class CouponScreen extends StatelessWidget {
 
   void _copyCoupon(BuildContext context, Coupon coupon) async {
     await Clipboard.setData(ClipboardData(text: coupon.code));
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Copied to clipboard'),
-      ),
-    );
+    showSnackBar(context, 'Copied to clipboard');
   }
 
   void _openUrl(BuildContext context, Coupon coupon) async {
-    if (await canLaunch(coupon.code)) {
-      await launch(coupon.code);
+    try {
+      final intent = AndroidIntent(
+        action: 'action_view',
+        data: coupon.code,
+      );
+      await intent.launch();
+    } catch (e) {
+      if (isHttp(coupon.code)) {
+        showSnackBar(context, 'There was an error opening the website');
+      } else {
+        showSnackBar(context, 'Please install the app');
+      }
     }
   }
 

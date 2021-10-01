@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fundl_app/auth/screens/age_confirmation.screen.dart';
 import 'package:fundl_app/auth/screens/email_confirmation.screen.dart';
 import 'package:fundl_app/auth/screens/forgot_password.screen.dart';
@@ -18,6 +19,9 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     return MaterialApp(
       initialRoute: LoadingScreen.routeName,
       debugShowCheckedModeBanner: false,
