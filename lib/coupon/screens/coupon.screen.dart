@@ -134,7 +134,14 @@ class CouponScreen extends StatelessWidget {
                     children: [
                       const Spacer(),
                       CachedNetworkImage(
+                        height: 400.0,
                         imageUrl: discount.image.url,
+                        placeholder: (context, url) => const SizedBox(
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                          height: 400.0,
+                        ),
                       ),
                       Text(
                         discount.name,
