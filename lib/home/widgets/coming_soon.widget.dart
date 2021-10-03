@@ -13,23 +13,26 @@ class ComingSoonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const CardHeader(
-          title: '💪  Prihaja kmalu',
-          showViewAll: false,
-        ),
-        const SizedBox(height: 10.0),
-        SizedBox(
-          height: 130.0,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: comingSoon.length,
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            itemBuilder: (context, i) => ComingSoonItem(comingSoon[i]),
+    return Visibility(
+      visible: comingSoon.isNotEmpty,
+      child: Column(
+        children: [
+          const CardHeader(
+            title: '💪  Prihaja kmalu',
+            showViewAll: false,
           ),
-        ),
-      ],
+          const SizedBox(height: 10.0),
+          SizedBox(
+            height: 130.0,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: comingSoon.length,
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              itemBuilder: (context, i) => ComingSoonItem(comingSoon[i]),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

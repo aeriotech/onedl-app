@@ -1,9 +1,9 @@
 name: fundl_app
-description: Fundl app
+description: Fundl App
 
 publish_to: "none"
 
-version: 1.0.0+3
+version: 1.0.1
 
 environment:
   sdk: ">=2.12.0 <3.0.0"

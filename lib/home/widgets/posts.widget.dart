@@ -12,14 +12,17 @@ class Posts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 350.0,
-      child: PageView.builder(
-        itemCount: posts.length,
-        itemBuilder: (context, i) {
-          final post = posts[i];
-          return CachedNetworkImage(imageUrl: post.image.url);
-        },
+    return Visibility(
+      visible: posts.isNotEmpty,
+      child: SizedBox(
+        height: 350.0,
+        child: PageView.builder(
+          itemCount: posts.length,
+          itemBuilder: (context, i) {
+            final post = posts[i];
+            return CachedNetworkImage(imageUrl: post.image.url);
+          },
+        ),
       ),
     );
   }
