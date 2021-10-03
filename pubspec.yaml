@@ -50,6 +50,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+    - config/
 
 flutter_icons:
   android: "launcher_icon"

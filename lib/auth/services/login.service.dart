@@ -5,16 +5,17 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fundl_app/api/exceptions/bad_request.exception.dart';
 import 'package:fundl_app/api/exceptions/forbidden.exception.dart';
 import 'package:fundl_app/api/exceptions/unauthorized.exception.dart';
+import 'package:fundl_app/api/services/api.service.dart';
 import 'package:fundl_app/auth/models/login.dto.dart';
 import 'package:fundl_app/auth/models/login.response.dart';
-import 'package:fundl_app/config/api.config.dart';
 
 const storage = FlutterSecureStorage();
+final api = ApiService.instance;
 
 class LoginService {
   static Future<void> login(LoginDto loginDto) async {
     try {
-      final response = await API.client.post(
+      final response = await api.client.post(
         '/auth',
         data: loginDto,
       );
@@ -49,11 +50,11 @@ class LoginService {
 
   static void loadToken([String? token]) async {
     if (token != null) {
-      API.client.options.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
+      api.client.options.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
     } else {
       if (await storage.containsKey(key: 'token')) {
         token = await storage.read(key: 'token');
-        API.client.options.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
+        api.client.options.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
       }
     }
   }

@@ -1,7 +1,9 @@
-import 'package:fundl_app/config/api.config.dart';
+import 'package:fundl_app/api/services/api.service.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'coupon.model.g.dart';
+
+final api = ApiService.instance;
 
 @JsonSerializable()
 class Coupon {
@@ -22,7 +24,7 @@ class Coupon {
   Map<String, dynamic> toJson() => _$CouponToJson(this);
 
   static Future<List<Coupon>> getCoupons() async {
-    final response = await API.client.get('/coupons');
+    final response = await api.client.get('/coupons');
 
     final jsonList = List.from(response.data);
     final coupons = jsonList.map((json) => Coupon.fromJson(json)).toList();

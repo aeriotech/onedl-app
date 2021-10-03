@@ -3,10 +3,12 @@ import 'package:fundl_app/api/exceptions/bad_request.exception.dart';
 import 'package:fundl_app/api/exceptions/conflict.exception.dart';
 import 'package:fundl_app/api/exceptions/not_found.exception.dart';
 import 'package:fundl_app/api/models/profile.model.dart';
-import 'package:fundl_app/config/api.config.dart';
+import 'package:fundl_app/api/services/api.service.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user.model.g.dart';
+
+final api = ApiService.instance;
 
 @JsonSerializable()
 class User {
@@ -35,7 +37,7 @@ class User {
   Map<String, dynamic> toJson(User instance) => _$UserToJson(instance);
 
   static Future<User> me() async {
-    final response = await API.client.get('/user/me');
+    final response = await api.client.get('/user/me');
 
     final user = User.fromJson(response.data);
 
@@ -44,7 +46,7 @@ class User {
 
   static Future<void> confirmAge(String emso) async {
     try {
-      await API.client.post('/age-confirmation/emso/$emso');
+      await api.client.post('/age-confirmation/emso/$emso');
     } on DioError catch (e) {
       switch (e.response?.statusCode) {
         case 400:

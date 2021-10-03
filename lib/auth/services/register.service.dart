@@ -3,12 +3,11 @@ import 'package:fundl_app/api/exceptions/bad_request.exception.dart';
 import 'package:fundl_app/api/exceptions/conflict.exception.dart';
 import 'package:fundl_app/api/models/user.model.dart';
 import 'package:fundl_app/auth/models/register.dto.dart';
-import 'package:fundl_app/config/api.config.dart';
 
 class RegisterService {
   static Future<User> register(RegisterDto registerDto) async {
     try {
-      final response = await API.client.post(
+      final response = await api.client.post(
         '/user',
         data: registerDto,
       );

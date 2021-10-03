@@ -8,10 +8,12 @@ class NavigationBar extends StatefulWidget {
     required this.labels,
     required this.controller,
     required this.icons,
+    required this.badges,
   }) : super(key: key);
 
   final List<String> labels;
   final List<IconData> icons;
+  final List<MotionBadgeWidget> badges;
   final PageController controller;
 
   @override
@@ -19,10 +21,7 @@ class NavigationBar extends StatefulWidget {
 }
 
 class _NavigationBarState extends State<NavigationBar> {
-  bool _showChatBadge = true;
-
   void _handleOnTap(int index) async {
-    if (index == 1) setState(() => _showChatBadge = false);
     await widget.controller.animateToPage(
       index,
       duration: const Duration(milliseconds: 300),
@@ -37,14 +36,7 @@ class _NavigationBarState extends State<NavigationBar> {
       labels: widget.labels,
       initialSelectedTab: widget.labels.first,
       onTabItemSelected: _handleOnTap,
-      badges: [
-        const MotionBadgeWidget(),
-        MotionBadgeWidget(
-          isIndicator: true,
-          size: 8.0,
-          show: _showChatBadge,
-        ),
-      ],
+      badges: widget.badges,
     );
   }
 }

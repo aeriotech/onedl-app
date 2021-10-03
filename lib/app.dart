@@ -6,7 +6,6 @@ import 'package:fundl_app/auth/screens/forgot_password.screen.dart';
 import 'package:fundl_app/auth/screens/register.screen.dart';
 import 'package:fundl_app/coupon/screens/coupon.screen.dart';
 import 'package:fundl_app/home/screens/main.screen.dart';
-import 'package:fundl_app/profile/screens/profile.screen.dart';
 
 import 'auth/screens/loading.screen.dart';
 import 'auth/screens/login.screen.dart';
@@ -33,8 +32,7 @@ class App extends StatelessWidget {
         EmailConfirmationScreen.routeName: (context) => const EmailConfirmationScreen(),
         AgeConfirmationScreen.routeName: (context) => AgeConfirmationScreen(),
         ForgotPasswordScreen.routeName: (context) => const ForgotPasswordScreen(),
-        MainScreen.routeName: (context) => MainScreen(),
-        ProfileScreen.routeName: (context) => const ProfileScreen(),
+        MainScreen.routeName: (context) => const MainScreen(),
         CouponScreen.routeName: (context) => const CouponScreen(),
       },
     );

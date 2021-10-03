@@ -6,8 +6,6 @@ import 'package:fundl_app/common/widgets/text_icon_button.widgets.dart';
 import 'package:fundl_app/profile/widgets/account_header.widget.dart';
 
 class ProfileScreen extends StatelessWidget {
-  static const routeName = '/profile';
-
   const ProfileScreen({Key? key}) : super(key: key);
 
   void _handleLogout(BuildContext context) {

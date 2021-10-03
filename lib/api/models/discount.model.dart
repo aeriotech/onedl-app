@@ -2,14 +2,16 @@ import 'package:dio/dio.dart';
 import 'package:fundl_app/api/exceptions/api/age_limit.exception.dart';
 import 'package:fundl_app/api/exceptions/api/coupon_limit.exception.dart';
 import 'package:fundl_app/api/exceptions/forbidden.exception.dart';
-import 'package:fundl_app/api/models/coupon.model.dart';
 import 'package:fundl_app/api/models/public_file.model.dart';
-import 'package:fundl_app/config/api.config.dart';
+import 'package:fundl_app/api/services/api.service.dart';
+import 'package:fundl_app/coupon/models/coupon.model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'shop.model.dart';
 
 part 'discount.model.g.dart';
+
+final api = ApiService.instance;
 
 enum CouponType {
   @JsonValue('CODE')
@@ -43,13 +45,13 @@ class Discount {
   Map<String, dynamic> toJson() => _$DiscountToJson(this);
 
   static Future<Discount> getDiscount(String uuid) async {
-    final response = await API.client.get('/discounts/$uuid');
+    final response = await api.client.get('/discounts/$uuid');
     final discount = Discount.fromJson(response.data);
     return discount;
   }
 
   static Future<List<Discount>> getDiscounts() async {
-    final response = await API.client.get('/discounts');
+    final response = await api.client.get('/discounts');
     final jsonList = List.from(response.data);
     final discounts = jsonList.map((json) => Discount.fromJson(json)).toList();
     return discounts;
@@ -57,7 +59,7 @@ class Discount {
 
   Future<Coupon> generate() async {
     try {
-      final response = await API.client.post('/discounts/$uuid/generate');
+      final response = await api.client.post('/discounts/$uuid/generate');
 
       final coupon = Coupon.fromJson(response.data);
       return coupon;

@@ -16,6 +16,7 @@ class MyCoupons extends StatelessWidget {
           CardHeader(
             title: '💪  Moji Kuponi',
             onClick: _handleViewAll,
+            color: Theme.of(context).colorScheme.background,
           ),
           const SizedBox(height: 30.0),
           SizedBox(

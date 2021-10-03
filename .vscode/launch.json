@@ -5,15 +5,25 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "app",
+      "name": "Production",
+      "type": "dart",
       "request": "launch",
-      "type": "dart"
+      "program": "lib/main.dart",
+      "args": ["--dart-define", "ENV=prod"]
     },
     {
-      "name": "app (release mode)",
-      "request": "launch",
+      "name": "Development",
       "type": "dart",
-      "flutterMode": "release"
+      "request": "launch",
+      "program": "lib/main.dart",
+      "args": ["--dart-define", "ENV=dev"]
+    },
+    {
+      "name": "Local",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "args": ["--dart-define", "ENV=local"]
     }
   ]
 }
