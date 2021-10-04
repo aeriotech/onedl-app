@@ -5,13 +5,15 @@ import 'package:fundl_app/api/exceptions/forbidden.exception.dart';
 import 'package:fundl_app/api/models/public_file.model.dart';
 import 'package:fundl_app/api/services/api.service.dart';
 import 'package:fundl_app/coupon/models/coupon.model.dart';
+import 'package:fundl_app/discount/discount.service.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'shop.model.dart';
 
 part 'discount.model.g.dart';
 
-final api = ApiService.instance;
+final client = ApiService.instance.client;
+final discountService = client.getService<DiscountService>();
 
 enum CouponType {
   @JsonValue('CODE')
@@ -45,23 +47,30 @@ class Discount {
   Map<String, dynamic> toJson() => _$DiscountToJson(this);
 
   static Future<Discount> getDiscount(String uuid) async {
-    final response = await api.client.get('/discounts/$uuid');
-    final discount = Discount.fromJson(response.data);
+    final response = await discountService.getDiscount(uuid);
+    final discount = response.body;
+    if (discount == null) {
+      throw Exception('Discount not found');
+    }
     return discount;
   }
 
   static Future<List<Discount>> getDiscounts() async {
-    final response = await api.client.get('/discounts');
-    final jsonList = List.from(response.data);
-    final discounts = jsonList.map((json) => Discount.fromJson(json)).toList();
+    final response = await discountService.getDiscounts();
+    final discounts = response.body;
+    if (discounts == null) {
+      throw Exception('Discounts not found');
+    }
     return discounts;
   }
 
   Future<Coupon> generate() async {
     try {
-      final response = await api.client.post('/discounts/$uuid/generate');
-
-      final coupon = Coupon.fromJson(response.data);
+      final response = await discountService.generate(uuid);
+      final coupon = response.body;
+      if (coupon == null) {
+        throw Exception('Coupon not found');
+      }
       return coupon;
     } on DioError catch (e) {
       final message = e.response?.data['message'];

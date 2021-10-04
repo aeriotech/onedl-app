@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:fundl_app/age_confirmation/age_confirmation.service.dart';
 import 'package:fundl_app/api/exceptions/bad_request.exception.dart';
 import 'package:fundl_app/api/exceptions/conflict.exception.dart';
 import 'package:fundl_app/api/exceptions/not_found.exception.dart';
-import 'package:fundl_app/api/models/user.model.dart';
 import 'package:fundl_app/common/widgets/text_field.widget.dart';
 import 'package:fundl_app/common/widgets/text_icon_button.widgets.dart';
 
@@ -21,7 +21,7 @@ class AgeConfirmationScreen extends StatelessWidget {
 
   void _handleConfirmAge(BuildContext context) async {
     try {
-      await User.confirmAge(_ageController.text);
+      await AgeConfirmationService.confirmAge(_ageController.text);
       if (Navigator.of(context).canPop()) {
         Navigator.of(context).pop();
       }

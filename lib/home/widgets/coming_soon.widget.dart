@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fundl_app/api/models/coming_soon.model.dart';
+import 'package:fundl_app/coming_soon/coming_soon.model.dart';
 import 'package:fundl_app/home/widgets/card_header.widget.dart';
 import 'package:fundl_app/home/widgets/coming_soon_item.widget.dart';
 

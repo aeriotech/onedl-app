@@ -1,43 +1,22 @@
-import 'dart:io';
-
-import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:fundl_app/api/exceptions/bad_request.exception.dart';
-import 'package:fundl_app/api/exceptions/forbidden.exception.dart';
-import 'package:fundl_app/api/exceptions/unauthorized.exception.dart';
 import 'package:fundl_app/api/services/api.service.dart';
 import 'package:fundl_app/auth/models/login.dto.dart';
-import 'package:fundl_app/auth/models/login.response.dart';
+import 'package:fundl_app/auth/services/auth.service.dart';
 
 const storage = FlutterSecureStorage();
-final api = ApiService.instance;
+final client = ApiService.instance.client;
+final authService = client.getService<AuthService>();
 
 class LoginService {
   static Future<void> login(LoginDto loginDto) async {
-    try {
-      final response = await api.client.post(
-        '/auth',
-        data: loginDto,
-      );
-      if (response.data == null) {
-        return;
-      }
+    final response = await authService.login(loginDto);
+    final loginResponse = response.body;
 
-      final loginResponse = LoginResponse.fromJson(response.data);
-
-      await saveToken(loginResponse.accessToken);
-    } on DioError catch (e) {
-      switch (e.response?.statusCode) {
-        case 400:
-          throw BadRequestException(e.message);
-        case 401:
-          throw UnauthorizedException(e.message);
-        case 403:
-          throw ForbiddenException(e.message);
-        default:
-          rethrow;
-      }
+    if (loginResponse == null) {
+      return;
     }
+
+    await saveToken(loginResponse.accessToken);
   }
 
   static Future<void> saveToken(String token) async {
@@ -45,18 +24,6 @@ class LoginService {
       key: 'token',
       value: token,
     );
-    loadToken(token);
-  }
-
-  static void loadToken([String? token]) async {
-    if (token != null) {
-      api.client.options.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
-    } else {
-      if (await storage.containsKey(key: 'token')) {
-        token = await storage.read(key: 'token');
-        api.client.options.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
-      }
-    }
   }
 
   static Future<bool> isLoggedIn() {

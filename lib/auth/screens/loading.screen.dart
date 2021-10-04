@@ -13,7 +13,6 @@ class LoadingScreen extends StatelessWidget {
     if (!await LoginService.isLoggedIn()) {
       Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
     } else {
-      LoginService.loadToken();
       Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
     }
   }

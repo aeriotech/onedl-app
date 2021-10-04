@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fundl_app/api/exceptions/bad_request.exception.dart';
 import 'package:fundl_app/api/exceptions/forbidden.exception.dart';
 import 'package:fundl_app/api/exceptions/unauthorized.exception.dart';
-import 'package:fundl_app/api/models/user.model.dart';
+import 'package:fundl_app/user/user.model.dart';
 import 'package:fundl_app/auth/models/login.dto.dart';
 import 'package:fundl_app/auth/screens/age_confirmation.screen.dart';
 import 'package:fundl_app/auth/screens/forgot_password.screen.dart';

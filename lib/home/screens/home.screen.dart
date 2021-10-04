@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fundl_app/api/models/coming_soon.model.dart';
+import 'package:fundl_app/coming_soon/coming_soon.model.dart';
 import 'package:fundl_app/api/models/discount.model.dart';
 import 'package:fundl_app/api/models/post.model.dart';
-import 'package:fundl_app/api/models/profile.model.dart';
-import 'package:fundl_app/api/models/user.model.dart';
+import 'package:fundl_app/user/user.model.dart';
 import 'package:fundl_app/common/widgets/header.widget.dart';
 import 'package:fundl_app/home/widgets/coming_soon.widget.dart';
 import 'package:fundl_app/home/widgets/posts.widget.dart';

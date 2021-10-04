@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:fundl_app/api/models/coming_soon.model.dart';
+import 'package:fundl_app/coming_soon/coming_soon.model.dart';
 
 class ComingSoonItem extends StatelessWidget {
   const ComingSoonItem(

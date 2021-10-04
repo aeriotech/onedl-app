@@ -1,10 +1,12 @@
 import 'package:fundl_app/api/models/public_file.model.dart';
 import 'package:fundl_app/api/services/api.service.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:fundl_app/post/post.service.dart';
 
 part 'post.model.g.dart';
 
-final api = ApiService.instance;
+final client = ApiService.instance.client;
+final postService = client.getService<PostService>();
 
 @JsonSerializable()
 class Post {
@@ -21,11 +23,11 @@ class Post {
   Map<String, dynamic> toJson() => _$PostToJson(this);
 
   static Future<List<Post>> getPosts() async {
-    final response = await api.client.get('/posts');
-
-    final jsonList = List.from(response.data);
-    final posts = jsonList.map((json) => Post.fromJson(json)).toList();
-
+    final response = await postService.getPosts();
+    final posts = response.body;
+    if (posts == null) {
+      throw Exception('Failed to load posts');
+    }
     return posts;
   }
 }

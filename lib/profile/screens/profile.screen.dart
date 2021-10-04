@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:fundl_app/api/models/user.model.dart';
+import 'package:fundl_app/user/user.model.dart';
 import 'package:fundl_app/auth/services/login.service.dart';
 import 'package:fundl_app/common/widgets/text_icon_button.widgets.dart';
 import 'package:fundl_app/profile/widgets/account_header.widget.dart';
