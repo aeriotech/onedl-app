@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
-  const Header({Key? key}) : super(key: key);
+  const Header({
+    Key? key,
+    required this.name,
+  }) : super(key: key);
+
+  final String name;
 
   TextStyle get _textStyle => const TextStyle(
         fontSize: 18.0,
@@ -16,7 +21,7 @@ class Header extends StatelessWidget {
       color: Colors.blue,
       child: Center(
         child: Text(
-          'Good morning Gašper!',
+          'Good morning $name!',
           style: _textStyle,
         ),
       ),
