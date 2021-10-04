@@ -22,10 +22,10 @@ class CouponScreenArguments {
   final String uuid;
 }
 
-class CouponScreen extends StatelessWidget {
-  static const routeName = '/coupon';
+class DiscountScreen extends StatelessWidget {
+  static const routeName = '/discounts';
 
-  const CouponScreen({Key? key}) : super(key: key);
+  const DiscountScreen({Key? key}) : super(key: key);
 
   TextStyle get _nameStyle => const TextStyle(
         fontSize: 24.0,

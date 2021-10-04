@@ -33,7 +33,7 @@ class App extends StatelessWidget {
         AgeConfirmationScreen.routeName: (context) => AgeConfirmationScreen(),
         ForgotPasswordScreen.routeName: (context) => const ForgotPasswordScreen(),
         MainScreen.routeName: (context) => const MainScreen(),
-        CouponScreen.routeName: (context) => const CouponScreen(),
+        DiscountScreen.routeName: (context) => const DiscountScreen(),
       },
     );
   }

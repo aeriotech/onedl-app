@@ -1,6 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fundl_app/api/models/post.model.dart';
+
+import 'post.widget.dart';
 
 class Posts extends StatelessWidget {
   const Posts({
@@ -20,7 +21,10 @@ class Posts extends StatelessWidget {
           itemCount: posts.length,
           itemBuilder: (context, i) {
             final post = posts[i];
-            return CachedNetworkImage(imageUrl: post.image.url);
+            return PostWidget(
+              url: post.url,
+              imageUrl: post.image.url,
+            );
           },
         ),
       ),

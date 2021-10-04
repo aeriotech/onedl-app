@@ -19,7 +19,7 @@ class TopDeals extends StatelessWidget {
 
   void _handleOpen(BuildContext context, String uuid) {
     Navigator.of(context).pushNamed(
-      CouponScreen.routeName,
+      DiscountScreen.routeName,
       arguments: CouponScreenArguments(uuid: uuid),
     );
   }
