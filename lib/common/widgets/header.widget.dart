@@ -14,6 +14,17 @@ class Header extends StatelessWidget {
         color: Colors.white,
       );
 
+  String get _prompt {
+    final hour = DateTime.now().hour;
+    if (hour < 12) {
+      return 'Good morning';
+    } else if (hour < 18) {
+      return 'Good afternoon';
+    } else {
+      return 'Good evening';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,7 +32,7 @@ class Header extends StatelessWidget {
       color: Colors.blue,
       child: Center(
         child: Text(
-          'Good morning $name!',
+          '$_prompt $name!',
           style: _textStyle,
         ),
       ),

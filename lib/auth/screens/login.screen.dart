@@ -19,6 +19,14 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _loadingOverlay = OverlayEntry(
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+
     void _showErrorSnackbar(String message) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -33,7 +41,9 @@ class LoginScreen extends StatelessWidget {
     void _handleLogin(LoginDto loginDto) async {
       try {
         await LoginService.login(loginDto);
+        Overlay.of(context)?.insert(_loadingOverlay);
         final user = await User.me();
+        _loadingOverlay.remove();
         if (!user.ageConfirmed) {
           await Navigator.of(context).pushNamed(AgeConfirmationScreen.routeName);
         }
@@ -56,7 +66,6 @@ class LoginScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(
