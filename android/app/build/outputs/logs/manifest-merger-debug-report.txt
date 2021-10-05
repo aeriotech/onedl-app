@@ -1,10 +1,10 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:1:1-52:12
-INJECTED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:1:1-52:12
-INJECTED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:1:1-52:12
-INJECTED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:1:1-52:12
-MERGED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:1:1-52:12
+ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:1:1-61:12
+INJECTED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:1:1-61:12
+INJECTED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:1:1-61:12
+INJECTED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:1:1-61:12
+MERGED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:1:1-61:12
 MERGED from [:sqflite] /Users/gapi/repos/fundl/app/build/sqflite/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [:url_launcher] /Users/gapi/repos/fundl/app/build/url_launcher/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-14:12
 MERGED from [:path_provider] /Users/gapi/repos/fundl/app/build/path_provider/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
@@ -32,16 +32,16 @@ INJECTED from /Users/gapi/repos/fundl/app/android/app/src/debug/AndroidManifest.
 		INJECTED from /Users/gapi/repos/fundl/app/android/app/src/debug/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:1:1-52:12
+		ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:1:1-61:12
 		INJECTED from /Users/gapi/repos/fundl/app/android/app/src/debug/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:1:1-52:12
+		ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:1:1-61:12
 		INJECTED from /Users/gapi/repos/fundl/app/android/app/src/debug/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:2:5-63
 application
-ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:4:5-42:19
+ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:4:5-51:19
 MERGED from [:url_launcher] /Users/gapi/repos/fundl/app/build/url_launcher/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-12:19
 MERGED from [:url_launcher] /Users/gapi/repos/fundl/app/build/url_launcher/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-12:19
 MERGED from [androidx.core:core:1.1.0] /Users/gapi/.gradle/caches/transforms-2/files-2.1/2e94107f30f39be366a17347c2bf100b/core-1.1.0/AndroidManifest.xml:24:5-89
@@ -55,7 +55,7 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/gapi
 	android:icon
 		ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:6:9-45
 activity#io.fundl.app.MainActivity
-ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:7:9-35:20
+ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:7:9-44:20
 	android:launchMode
 		ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:9:13-43
 	android:hardwareAccelerated
@@ -90,30 +90,50 @@ category#android.intent.category.LAUNCHER
 ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:33:17-76
 	android:name
 		ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:33:27-74
-meta-data#flutterEmbedding
-ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:38:9-40:33
+meta-data#flutter_deeplinking_enabled
+ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:36:13-90
 	android:value
-		ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:40:13-30
+		ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:36:67-87
 	android:name
-		ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:39:13-44
-uses-permission#android.permission.INTERNET
-ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:44:5-66
-MERGED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:44:5-66
-MERGED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:44:5-66
-	android:name
-		ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:44:22-64
-queries
-ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:46:5-51:15
-intent#action:name:android.intent.action.VIEW+data:scheme:https
-ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:47:7-50:16
+		ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:36:24-66
+intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:host:fundl.si+data:scheme:http+data:scheme:https
+ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:37:13-43:29
+	android:autoVerify
+		ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:37:28-53
 action#android.intent.action.VIEW
-ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:48:9-61
+ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:38:17-69
 	android:name
-		ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:48:17-58
+		ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:38:25-66
+category#android.intent.category.DEFAULT
+ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:39:17-76
+	android:name
+		ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:39:27-73
+category#android.intent.category.BROWSABLE
+ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:40:17-78
+	android:name
+		ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:40:27-75
 data
-ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:49:9-40
+ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:41:17-71
+	android:host
+		ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:41:45-68
 	android:scheme
-		ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:49:15-37
+		ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:41:23-44
+meta-data#flutterEmbedding
+ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:47:9-49:33
+	android:value
+		ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:49:13-30
+	android:name
+		ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:48:13-44
+uses-permission#android.permission.INTERNET
+ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:53:5-66
+MERGED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:53:5-66
+MERGED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:53:5-66
+	android:name
+		ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:53:22-64
+queries
+ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:55:5-60:15
+intent#action:name:android.intent.action.VIEW+data:scheme:https
+ADDED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml:56:7-59:16
 uses-sdk
 INJECTED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/gapi/repos/fundl/app/android/app/src/main/AndroidManifest.xml

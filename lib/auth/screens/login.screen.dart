@@ -56,15 +56,19 @@ class LoginScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      // resizeToAvoidBottomInset: false,
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(30.0),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 30.0,
+            vertical: 20.0,
+          ),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              const SizedBox(height: 100.0),
+              const Spacer(flex: 2),
               Image.asset(AppAssets.logo),
-              const SizedBox(height: 70.0),
+              const Spacer(flex: 1),
               Row(
                 children: const [
                   Text(
@@ -81,7 +85,7 @@ class LoginScreen extends StatelessWidget {
                 onLogin: _handleLogin,
                 onForgotPassword: _handleForgotPassword,
               ),
-              const Spacer(),
+              const Spacer(flex: 2),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
