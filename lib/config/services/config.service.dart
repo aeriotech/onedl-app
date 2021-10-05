@@ -13,9 +13,13 @@ class ConfigService {
   ConfigService(this.config);
 
   static init() async {
-    final data = await rootBundle.loadString('config/${env.toLowerCase()}.json');
-    final jsonData = jsonDecode(data);
-    _instance = ConfigService(Config.fromJson(jsonData));
+    try {
+      final data = await rootBundle.loadString('config/${env.toLowerCase()}.json');
+      final jsonData = jsonDecode(data);
+      _instance = ConfigService(Config.fromJson(jsonData));
+    } catch (e) {
+      _instance = ConfigService(Config('https://api.fundl.io'));
+    }
   }
 
   static ConfigService get instance => _instance!;

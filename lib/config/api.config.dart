@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:fundl_app/config/services/config.service.dart';
 
 const apiUrl = 'https://api.fundl.io';
