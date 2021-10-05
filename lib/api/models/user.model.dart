@@ -4,6 +4,7 @@ import 'package:fundl_app/api/exceptions/conflict.exception.dart';
 import 'package:fundl_app/api/exceptions/not_found.exception.dart';
 import 'package:fundl_app/api/models/profile.model.dart';
 import 'package:fundl_app/api/services/api.service.dart';
+import 'package:fundl_app/auth/models/forgot_password.dto.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user.model.g.dart';
@@ -47,6 +48,25 @@ class User {
   static Future<void> confirmAge(String emso) async {
     try {
       await api.client.post('/age-confirmation/emso/$emso');
+    } on DioError catch (e) {
+      switch (e.response?.statusCode) {
+        case 400:
+          throw BadRequestException(e.message);
+        case 404:
+          throw NotFoundException(e.message);
+        case 409:
+          throw ConflictException(e.message);
+      }
+      rethrow;
+    }
+  }
+
+  static Future<void> forgotPassword(ForgotPasswordDto forgotPasswordDto) async {
+    try {
+      await api.client.post(
+        '/forgot-password',
+        data: forgotPasswordDto.toJson(),
+      );
     } on DioError catch (e) {
       switch (e.response?.statusCode) {
         case 400:

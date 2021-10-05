@@ -24,6 +24,12 @@ class PostWidget extends StatelessWidget {
       onTap: _handleClick,
       child: CachedNetworkImage(
         imageUrl: imageUrl,
+        placeholder: (context, url) => const SizedBox(
+          child: Center(
+            child: CircularProgressIndicator(),
+          ),
+        ),
+        height: 400.0,
       ),
     );
   }

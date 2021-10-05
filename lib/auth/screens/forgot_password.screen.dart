@@ -1,16 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:fundl_app/api/models/user.model.dart';
+import 'package:fundl_app/auth/models/forgot_password.dto.dart';
 import 'package:fundl_app/common/widgets/text_field.widget.dart';
 import 'package:fundl_app/common/widgets/text_icon_button.widgets.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   static const routeName = '/forgot-password';
 
-  const ForgotPasswordScreen({Key? key}) : super(key: key);
+  ForgotPasswordScreen({Key? key}) : super(key: key);
+
+  final _emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    void _handleResetPassword() {
+    void _handleResetPassword() async {
+      await User.forgotPassword(
+        ForgotPasswordDto(
+          email: _emailController.text,
+        ),
+      );
+      await showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Email sent'),
+          content: Text('The reset password link has been sent to ${_emailController.text}'),
+          actions: [
+            TextButton(
+              child: const Text('Ok'),
+              onPressed: Navigator.of(context).pop,
+            ),
+          ],
+        ),
+      );
       Navigator.of(context).pop();
     }
 
@@ -37,11 +59,12 @@ class ForgotPasswordScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20.0),
-              const FundlTextField(
-                decoration: InputDecoration(
-                  hintText: 'abc@email.com',
+              FundlTextField(
+                decoration: const InputDecoration(
+                  hintText: 'Your Email',
                   prefixIcon: Icon(IconlyLight.message),
                 ),
+                controller: _emailController,
               ),
               const SizedBox(height: 30.0),
               Padding(

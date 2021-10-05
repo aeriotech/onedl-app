@@ -41,9 +41,9 @@ class _LoginFormState extends State<LoginForm> {
         suffixIcon: _buildShowPasswordButton,
       );
 
-  // TextStyle get _forgotPasswordStyle => const TextStyle(
-  //       fontSize: 14.0,
-  //     );
+  TextStyle get _forgotPasswordStyle => const TextStyle(
+        fontSize: 14.0,
+      );
 
   void _handleLogin() {
     if (widget.onLogin == null) return;
@@ -85,19 +85,19 @@ class _LoginFormState extends State<LoginForm> {
           obscureText: !_showPassword,
           textInputAction: TextInputAction.done,
         ),
-        // const SizedBox(height: 20.0),
-        // GestureDetector(
-        //   onTap: widget.onForgotPassword,
-        //   child: Row(
-        //     mainAxisAlignment: MainAxisAlignment.end,
-        //     children: [
-        //       Text(
-        //         'Forgot Password?',
-        //         style: _forgotPasswordStyle,
-        //       ),
-        //     ],
-        //   ),
-        // ),
+        const SizedBox(height: 20.0),
+        GestureDetector(
+          onTap: widget.onForgotPassword,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                'Forgot Password?',
+                style: _forgotPasswordStyle,
+              ),
+            ],
+          ),
+        ),
         const SizedBox(height: 30.0),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40.0),
