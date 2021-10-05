@@ -4,6 +4,7 @@ import 'package:fundl_app/api/exceptions/forbidden.exception.dart';
 import 'package:fundl_app/api/exceptions/unauthorized.exception.dart';
 import 'package:fundl_app/api/models/user.model.dart';
 import 'package:fundl_app/auth/models/login.dto.dart';
+import 'package:fundl_app/auth/models/send_confirmation_email.dto.dart';
 import 'package:fundl_app/auth/screens/age_confirmation.screen.dart';
 import 'package:fundl_app/auth/screens/forgot_password.screen.dart';
 import 'package:fundl_app/auth/screens/loading.screen.dart';
@@ -27,6 +28,10 @@ class LoginScreen extends StatelessWidget {
       },
     );
 
+    final _resendTextStyle = TextStyle(
+      color: Theme.of(context).colorScheme.primary,
+    );
+
     void _showErrorSnackbar(String message) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -34,6 +39,23 @@ class LoginScreen extends StatelessWidget {
             heightFactor: 1,
             child: Text(message),
           ),
+        ),
+      );
+    }
+
+    void _handleResendEmailConfirmation(String email) async {
+      await User.sendConfirmationEmail(SendEmailConfirmationDto(email: email));
+      await showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Email sent'),
+          content: const Text('The confirmation link has been sent to your email'),
+          actions: [
+            TextButton(
+              child: const Text('Ok'),
+              onPressed: Navigator.of(context).pop,
+            ),
+          ],
         ),
       );
     }
@@ -53,7 +75,23 @@ class LoginScreen extends StatelessWidget {
       } on UnauthorizedException {
         _showErrorSnackbar('Wrong username or password');
       } on ForbiddenException {
-        _showErrorSnackbar('You didn\'t confirm your email');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Row(
+              children: [
+                const Text('You didn\'t confirm your email'),
+                const Spacer(),
+                GestureDetector(
+                  onTap: () => _handleResendEmailConfirmation(loginDto.username),
+                  child: Text(
+                    'Resend',
+                    style: _resendTextStyle,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
       }
     }
 

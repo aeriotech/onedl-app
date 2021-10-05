@@ -7,7 +7,7 @@ part of 'config.model.dart';
 // **************************************************************************
 
 Config _$ConfigFromJson(Map<String, dynamic> json) => Config(
-      json['apiUrl'] as String,
+      apiUrl: json['apiUrl'] as String,
     );
 
 Map<String, dynamic> _$ConfigToJson(Config instance) => <String, dynamic>{

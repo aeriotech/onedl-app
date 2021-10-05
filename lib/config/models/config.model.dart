@@ -6,7 +6,9 @@ part 'config.model.g.dart';
 class Config {
   final String apiUrl;
 
-  Config(this.apiUrl);
+  Config({
+    required this.apiUrl,
+  });
 
   factory Config.fromJson(Map<String, dynamic> json) => _$ConfigFromJson(json);
 

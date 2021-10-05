@@ -5,6 +5,7 @@ import 'package:fundl_app/api/exceptions/not_found.exception.dart';
 import 'package:fundl_app/api/models/profile.model.dart';
 import 'package:fundl_app/api/services/api.service.dart';
 import 'package:fundl_app/auth/models/forgot_password.dto.dart';
+import 'package:fundl_app/auth/models/send_confirmation_email.dto.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user.model.g.dart';
@@ -78,5 +79,12 @@ class User {
       }
       rethrow;
     }
+  }
+
+  static Future<void> sendConfirmationEmail(SendEmailConfirmationDto sendEmailConfirmationDto) async {
+    await api.client.put(
+      '/email-confirmation',
+      data: sendEmailConfirmationDto.toJson(),
+    );
   }
 }

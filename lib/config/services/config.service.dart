@@ -14,11 +14,15 @@ class ConfigService {
 
   static init() async {
     try {
-      final data = await rootBundle.loadString('config/${env.toLowerCase()}.json');
+      final data = await rootBundle.loadString('assets/config/${env.toLowerCase()}.json');
       final jsonData = jsonDecode(data);
       _instance = ConfigService(Config.fromJson(jsonData));
     } catch (e) {
-      _instance = ConfigService(Config('https://api.fundl.io'));
+      _instance = ConfigService(
+        Config(
+          apiUrl: 'https://api.fundl.io',
+        ),
+      );
     }
   }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:fundl_app/api/exceptions/bad_request.exception.dart';
 import 'package:fundl_app/api/exceptions/conflict.exception.dart';
+import 'package:fundl_app/api/exceptions/forbidden.exception.dart';
 import 'package:fundl_app/api/exceptions/not_found.exception.dart';
 import 'package:fundl_app/api/models/user.model.dart';
 import 'package:fundl_app/common/widgets/text_field.widget.dart';
