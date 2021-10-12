@@ -24,7 +24,7 @@ class Post {
     final response = await api.client.get('/posts');
 
     final jsonList = List.from(response.data);
-    final posts = jsonList.map((json) => Post.fromJson(json)).toList();
+    final posts = jsonList.map((json) => Post.fromJson(json)).toList().reversed.toList();
 
     return posts;
   }
