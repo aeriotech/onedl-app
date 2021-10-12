@@ -27,11 +27,13 @@ class Pages extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         children: screens,
       ),
-      bottomNavigationBar: NavigationBar(
-        controller: _controller,
-        icons: icons,
-        labels: lables,
-        badges: badges,
+      bottomNavigationBar: SafeArea(
+        child: NavigationBar(
+          controller: _controller,
+          icons: icons,
+          labels: lables,
+          badges: badges,
+        ),
       ),
     );
   }

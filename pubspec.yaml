@@ -23,6 +23,10 @@ dependencies:
   cached_network_image: ^3.1.0
   flutter_markdown: ^0.6.6
 
+  # Wheel
+  flutter_fortune_wheel: ^1.1.0
+  confetti: ^0.6.0
+
   # API
   dio: ^4.0.0
   flutter_secure_storage: ^4.2.1

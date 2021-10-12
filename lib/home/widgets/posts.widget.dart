@@ -21,9 +21,12 @@ class Posts extends StatelessWidget {
           itemCount: posts.length,
           itemBuilder: (context, i) {
             final post = posts[i];
-            return PostWidget(
-              url: post.url,
-              imageUrl: post.image.url,
+            return Padding(
+              padding: const EdgeInsets.all(32.0),
+              child: PostWidget(
+                url: post.url,
+                imageUrl: post.image.url,
+              ),
             );
           },
         ),

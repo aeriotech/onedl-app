@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
           future: User.me(),
           builder: (context, snapshot) {
             return Header(
-              name: snapshot.data?.profile?.firstName ?? 'User',
+              name: snapshot.data?.profile?.firstName ?? '',
             );
           },
         ),
