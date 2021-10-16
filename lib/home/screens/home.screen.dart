@@ -14,46 +14,54 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return Column(
       children: [
-        FutureBuilder<User>(
-          future: User.me(),
-          builder: (context, snapshot) {
-            return Header(
-              name: snapshot.data?.profile?.firstName ?? '',
-            );
-          },
+        SafeArea(
+          child: FutureBuilder<User>(
+            future: User.me(),
+            builder: (context, snapshot) {
+              return Header(
+                name: snapshot.data?.profile?.firstName ?? '',
+              );
+            },
+          ),
         ),
-        FutureBuilder<List<Post>>(
-          future: Post.getPosts(),
-          builder: (context, snapshot) {
-            return Posts(
-              posts: snapshot.data ?? [],
-            );
-          },
-        ),
-        FutureBuilder<List<Discount>>(
-          future: Discount.getDiscounts(),
-          builder: (context, snapshot) {
-            return TopDeals(
-              discounts: snapshot.data ?? [],
-              loading: snapshot.connectionState == ConnectionState.waiting,
-            );
-          },
-        ),
-        FutureBuilder<List<ComingSoon>>(
-          future: ComingSoon.getComingSoon(),
-          builder: (context, snapshot) {
-            return ComingSoonWidget(
-              comingSoon: snapshot.data ?? [],
-            );
-          },
-        ),
+        Expanded(
+          child: ListView(
+            children: [
+              FutureBuilder<List<Post>>(
+                future: Post.getPosts(),
+                builder: (context, snapshot) {
+                  return Posts(
+                    posts: snapshot.data ?? [],
+                  );
+                },
+              ),
+              FutureBuilder<List<Discount>>(
+                future: Discount.getDiscounts(),
+                builder: (context, snapshot) {
+                  return TopDeals(
+                    discounts: snapshot.data ?? [],
+                    loading: snapshot.connectionState == ConnectionState.waiting,
+                  );
+                },
+              ),
+              FutureBuilder<List<ComingSoon>>(
+                future: ComingSoon.getComingSoon(),
+                builder: (context, snapshot) {
+                  return ComingSoonWidget(
+                    comingSoon: snapshot.data ?? [],
+                  );
+                },
+              ),
 
-        const SizedBox(height: 50.0),
-        // const MyCoupons(),
-        const Social(),
-        const SizedBox(height: 100.0),
+              const SizedBox(height: 50.0),
+              // const MyCoupons(),
+              const Social(),
+              const SizedBox(height: 100.0),
+            ],
+          ),
+        ),
       ],
     );
   }

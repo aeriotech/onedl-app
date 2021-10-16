@@ -18,6 +18,8 @@ enum CouponType {
   code,
   @JsonValue('URL')
   url,
+  @JsonValue('BARCODE')
+  barcode,
 }
 
 @JsonSerializable()
@@ -25,15 +27,17 @@ class Discount {
   final String uuid;
   final String name;
   final String description;
+  final String? categoryUuid;
   final CouponType couponType;
-  final PublicFile thumbnail;
-  final PublicFile image;
+  final PublicFile? thumbnail;
+  final PublicFile? image;
   final Shop? shop;
 
   Discount({
     required this.uuid,
     required this.name,
     required this.description,
+    required this.categoryUuid,
     required this.couponType,
     required this.thumbnail,
     required this.image,

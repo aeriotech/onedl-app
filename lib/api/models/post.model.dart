@@ -8,12 +8,12 @@ final api = ApiService.instance;
 
 @JsonSerializable()
 class Post {
-  final String url;
+  final String? url;
   final PublicFile image;
 
   const Post({
-    required this.url,
     required this.image,
+    this.url,
   });
 
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);

@@ -3,12 +3,12 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 
 class ScreenBackButton extends StatelessWidget {
   const ScreenBackButton({
-    required this.color,
+    this.color = Colors.black,
     Key? key,
     this.onClick,
   }) : super(key: key);
 
-  final Color color;
+  final Color? color;
   final VoidCallback? onClick;
 
   @override

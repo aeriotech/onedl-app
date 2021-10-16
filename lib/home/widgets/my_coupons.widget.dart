@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:fundl_app/common/widgets/coupon.widget.dart';
+import 'package:fundl_app/coupon/models/coupon.model.dart';
 import 'package:fundl_app/home/widgets/card_header.widget.dart';
 
 class MyCoupons extends StatelessWidget {
-  const MyCoupons({Key? key}) : super(key: key);
+  const MyCoupons({
+    Key? key,
+    required this.coupons,
+  }) : super(key: key);
+
+  final List<Coupon> coupons;
 
   void _handleViewAll() {}
 
@@ -17,6 +23,7 @@ class MyCoupons extends StatelessWidget {
             title: '💪  Moji Kuponi',
             onClick: _handleViewAll,
             color: Theme.of(context).colorScheme.background,
+            showViewAll: false,
           ),
           const SizedBox(height: 30.0),
           SizedBox(
@@ -25,11 +32,11 @@ class MyCoupons extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
-              children: const [
-                Coupon(title: 'Testni kupon 1'),
-                Coupon(title: 'Daljši testni kupon'),
-                Coupon(title: 'Ta kupon je zelo velik, zato se mu besedilo premika'),
-              ],
+              children: coupons
+                  .map(
+                    (coupon) => CouponWidget.fromCoupon(coupon),
+                  )
+                  .toList(),
             ),
           ),
         ],

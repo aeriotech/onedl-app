@@ -23,6 +23,9 @@ dependencies:
   cached_network_image: ^3.1.0
   flutter_markdown: ^0.6.6
 
+  # Coupons
+  barcode_widget: ^2.0.1
+
   # Wheel
   flutter_fortune_wheel: ^1.1.0
   confetti: ^0.6.0

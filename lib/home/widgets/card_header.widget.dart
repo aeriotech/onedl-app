@@ -58,7 +58,7 @@ class CardHeader extends StatelessWidget {
                     style: _viewAllStyle(light),
                   ),
                   Icon(
-                    IconlyLight.arrowRight2,
+                    IconlyLight.arrowRight,
                     color: _viewAllColor(light),
                     size: 18.0,
                   ),

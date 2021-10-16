@@ -20,45 +20,53 @@ class TopDeals extends StatelessWidget {
   void _handleOpen(BuildContext context, String uuid) {
     Navigator.of(context).pushNamed(
       DiscountScreen.routeName,
-      arguments: CouponScreenArguments(uuid: uuid),
+      arguments: DiscountScreenArguments(uuid: uuid),
     );
   }
 
   Widget _buildItem(BuildContext context, int i) {
     final discount = discounts[i];
+    if (discount.thumbnail == null) {
+      return const SizedBox(
+        height: 200,
+      );
+    }
     return GestureDetector(
       onTap: () => _handleOpen(context, discount.uuid),
       child: CachedNetworkImage(
-        imageUrl: discount.thumbnail.url,
+        imageUrl: discount.thumbnail!.url,
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: AppTheme.dirtyWhite,
-      child: Column(
-        children: [
-          CardHeader(
-            title: '🔥  Top deals',
-            onClick: _handleViewAll,
-            showViewAll: false,
-            color: AppTheme.dirtyWhite,
-          ),
-          const SizedBox(height: 20.0),
-          SizedBox(
-            height: 250.0,
-            child: ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              itemCount: discounts.length,
-              itemBuilder: _buildItem,
+    return Visibility(
+      visible: discounts.isNotEmpty,
+      child: Container(
+        color: AppTheme.dirtyWhite,
+        child: Column(
+          children: [
+            CardHeader(
+              title: '🔥  Top deals',
+              onClick: _handleViewAll,
+              showViewAll: false,
+              color: AppTheme.dirtyWhite,
             ),
-          ),
-          const SizedBox(height: 20.0),
-        ],
+            const SizedBox(height: 20.0),
+            SizedBox(
+              height: 250.0,
+              child: ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                itemCount: discounts.length,
+                itemBuilder: _buildItem,
+              ),
+            ),
+            const SizedBox(height: 20.0),
+          ],
+        ),
       ),
     );
   }

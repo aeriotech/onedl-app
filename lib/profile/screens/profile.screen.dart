@@ -3,6 +3,8 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:fundl_app/api/models/user.model.dart';
 import 'package:fundl_app/auth/services/login.service.dart';
 import 'package:fundl_app/common/widgets/text_icon_button.widgets.dart';
+import 'package:fundl_app/coupon/models/coupon.model.dart';
+import 'package:fundl_app/home/widgets/my_coupons.widget.dart';
 import 'package:fundl_app/profile/widgets/account_header.widget.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -16,38 +18,50 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: FutureBuilder<User>(
-              future: User.me(),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Flexible(
+              child: FutureBuilder<User>(
+                future: User.me(),
+                builder: (context, snapshot) {
+                  final user = snapshot.data;
+
+                  if (user == null) {
+                    return Container();
+                  }
+
+                  return ProfileHeader(
+                    name: '${user.profile?.firstName ?? ''} ${user.profile?.lastName ?? ''}',
+                    username: user.username,
+                    friendCount: 0,
+                    coinCount: user.score,
+                  );
+                },
+              ),
+            ),
+            FutureBuilder<List<Coupon>>(
+              future: Coupon.getCoupons(),
               builder: (context, snapshot) {
-                final user = snapshot.data;
-
-                if (user == null) {
-                  return Container();
-                }
-
-                return ProfileHeader(
-                  name: '${user.profile?.firstName ?? ''} ${user.profile?.lastName ?? ''}',
-                  username: user.username,
-                  friendCount: 0,
-                  coinCount: user.score,
+                final coupons = snapshot.data;
+                return MyCoupons(
+                  coupons: coupons ?? [],
                 );
               },
             ),
-          ),
-          // MyCoupons(),
-          // const ActionMenu(),
-          Padding(
-            padding: const EdgeInsets.all(32.0),
-            child: TextIconButton(
-              text: 'Logout',
-              icon: IconlyLight.logout,
-              onClick: () => _handleLogout(context),
+            // const ActionMenu(),
+            Padding(
+              padding: const EdgeInsets.all(32.0),
+              child: TextIconButton(
+                text: 'Logout',
+                icon: IconlyLight.logout,
+                onClick: () => _handleLogout(context),
+              ),
             ),
-          ),
-        ],
+            const SizedBox(height: 16.0),
+          ],
+        ),
       ),
     );
   }

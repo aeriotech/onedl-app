@@ -20,7 +20,8 @@ class SquareBackground extends StatelessWidget {
         );
 
     final _xCount = (MediaQuery.of(context).size.width / size).floor();
-    final _yCount = (MediaQuery.of(context).size.height / size).floor();
+    // final _yCount = (MediaQuery.of(context).size.height / size).floor();
+    const _yCount = 8;
 
     final row = List.filled(_xCount, _square());
     final items = List.filled(

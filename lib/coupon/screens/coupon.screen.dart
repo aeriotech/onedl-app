@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:android_intent_plus/android_intent.dart';
+import 'package:barcode_widget/barcode_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,9 +18,10 @@ import 'package:fundl_app/utils/snackbar.utils.dart';
 import 'package:fundl_app/utils/url.utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class CouponScreenArguments {
-  CouponScreenArguments({required this.uuid});
+class DiscountScreenArguments {
+  DiscountScreenArguments({required this.uuid, this.couponCode});
   final String uuid;
+  final String? couponCode;
 }
 
 class DiscountScreen extends StatelessWidget {
@@ -36,6 +38,12 @@ class DiscountScreen extends StatelessWidget {
     Navigator.of(context).pop();
   }
 
+  void _handleUrlClick(String? url) async {
+    if (url != null && await canLaunch(url)) {
+      launch(url);
+    }
+  }
+
   void _handleClick(
     BuildContext context,
     Discount discount, [
@@ -50,12 +58,29 @@ class DiscountScreen extends StatelessWidget {
           _copyCoupon(context, coupon);
         }
         break;
+      case CouponType.barcode:
+        if (coupon != null) {
+          _showBarcode(context, coupon);
+        }
+        break;
       case CouponType.url:
         if (coupon != null) {
           _openUrl(context, coupon);
         }
         break;
     }
+  }
+
+  void _showBarcode(BuildContext context, Coupon coupon) {
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        child: BarcodeWidget(
+          data: coupon.code,
+          barcode: Barcode.code128(),
+        ),
+      ),
+    );
   }
 
   void _generateCoupon(BuildContext context, Discount discount, Function(Coupon)? callback) async {
@@ -115,6 +140,8 @@ class DiscountScreen extends StatelessWidget {
     switch (discount.couponType) {
       case CouponType.code:
         return 'Generate';
+      case CouponType.barcode:
+        return 'Show barcode';
       case CouponType.url:
         return 'Open';
     }
@@ -122,7 +149,7 @@ class DiscountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments! as CouponScreenArguments;
+    final args = ModalRoute.of(context)!.settings.arguments! as DiscountScreenArguments;
 
     return Scaffold(
       body: SafeArea(
@@ -157,16 +184,17 @@ class DiscountScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       const Spacer(),
-                      CachedNetworkImage(
-                        height: 400.0,
-                        imageUrl: discount.image.url,
-                        placeholder: (context, url) => const SizedBox(
-                          child: Center(
-                            child: CircularProgressIndicator(),
-                          ),
+                      if (discount.image != null)
+                        CachedNetworkImage(
                           height: 400.0,
+                          imageUrl: discount.image!.url,
+                          placeholder: (context, url) => const SizedBox(
+                            child: Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                            height: 400.0,
+                          ),
                         ),
-                      ),
                       Text(
                         discount.name,
                         style: _nameStyle,
@@ -174,6 +202,7 @@ class DiscountScreen extends StatelessWidget {
                       const SizedBox(height: 20.0),
                       MarkdownBody(
                         data: discount.description,
+                        onTapLink: (_, url, __) => _handleUrlClick(url),
                         styleSheet: MarkdownStyleSheet(
                           textAlign: WrapAlignment.center,
                         ),
@@ -183,7 +212,6 @@ class DiscountScreen extends StatelessWidget {
                         future: Coupon.getCoupons(),
                         builder: (context, snapshot) {
                           final coupons = snapshot.data;
-
                           if (coupons == null) {
                             return TextIconButton(
                               text: _buildButtonText(discount),
@@ -194,7 +222,12 @@ class DiscountScreen extends StatelessWidget {
 
                           String buttonText = _buildButtonText(discount);
 
-                          Coupon? coupon = filtered.isNotEmpty ? filtered.first : null;
+                          Coupon? coupon = filtered.isNotEmpty
+                              ? filtered.firstWhere(
+                                  (coupon) => coupon.code == args.couponCode,
+                                  orElse: () => filtered.first,
+                                )
+                              : null;
 
                           return StatefulBuilder(
                             builder: (context, setState) {
@@ -204,6 +237,9 @@ class DiscountScreen extends StatelessWidget {
                                   break;
 
                                 case CouponType.url:
+                                  break;
+
+                                case CouponType.barcode:
                                   break;
                               }
                               return TextIconButton(

@@ -11,4 +11,5 @@ class AppAssets {
   static const placeholderLogo = 'assets/placeholder_mcdonalds_logo.png';
   static const placeholderCoupon = 'assets/placeholder_coupon.png';
   static const chatPreview = 'assets/chat_preview.png';
+  static const wheel = 'assets/wheel.png';
 }

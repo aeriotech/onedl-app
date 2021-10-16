@@ -7,8 +7,8 @@ part of 'post.model.dart';
 // **************************************************************************
 
 Post _$PostFromJson(Map<String, dynamic> json) => Post(
-      url: json['url'] as String,
       image: PublicFile.fromJson(json['image'] as Map<String, dynamic>),
+      url: json['url'] as String?,
     );
 
 Map<String, dynamic> _$PostToJson(Post instance) => <String, dynamic>{

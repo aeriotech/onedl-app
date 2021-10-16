@@ -6,6 +6,7 @@ class AppTheme {
   static const Color grey = Color(0xFFB0B0B0);
   static const Color darkGrey = Color(0xFF495057);
   static const Color dirtyWhite = Color(0xFFF9F9F9);
+  static const Color orange = Color(0xFFFCC127);
 
   static getDefault() {
     final theme = ThemeData();

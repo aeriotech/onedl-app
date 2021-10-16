@@ -23,8 +23,7 @@ class App extends StatelessWidget {
       DeviceOrientation.portraitUp,
     ]);
     return MaterialApp(
-      initialRoute: LoadingScreen.routeName, // LoadingScreen.routeName,
-      debugShowCheckedModeBanner: false,
+      initialRoute: LoadingScreen.routeName,
       theme: AppTheme.getDefault(),
       routes: {
         LoadingScreen.routeName: (context) => const LoadingScreen(),

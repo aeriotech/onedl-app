@@ -1,3 +1,4 @@
+import 'package:fundl_app/api/models/discount.model.dart';
 import 'package:fundl_app/api/services/api.service.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -8,6 +9,7 @@ final api = ApiService.instance;
 @JsonSerializable()
 class Coupon {
   final String discountUuid;
+  final Discount discount;
   final String code;
   final DateTime? validTo;
   final DateTime createdAt;
@@ -15,6 +17,7 @@ class Coupon {
   Coupon({
     required this.discountUuid,
     required this.code,
+    required this.discount,
     required this.validTo,
     required this.createdAt,
   });
