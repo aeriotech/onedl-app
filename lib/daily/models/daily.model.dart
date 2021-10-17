@@ -15,9 +15,9 @@ final api = ApiService.instance;
 class Daily {
   final String uuid;
   final String name;
-  final PublicFile? background;
+  final PublicFile? background, thumbnail;
 
-  Daily(this.uuid, this.name, this.background);
+  Daily(this.uuid, this.name, this.background, this.thumbnail);
 
   factory Daily.fromJson(Map<String, dynamic> json) => _$DailyFromJson(json);
 

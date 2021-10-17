@@ -4,6 +4,7 @@ import 'package:fundl_app/api/models/discount.model.dart';
 import 'package:fundl_app/api/models/post.model.dart';
 import 'package:fundl_app/api/models/user.model.dart';
 import 'package:fundl_app/common/widgets/header.widget.dart';
+import 'package:fundl_app/daily/models/daily.model.dart';
 import 'package:fundl_app/home/widgets/coming_soon.widget.dart';
 import 'package:fundl_app/home/widgets/posts.widget.dart';
 import 'package:fundl_app/home/widgets/social.widget.dart';
@@ -37,11 +38,17 @@ class HomeScreen extends StatelessWidget {
                   );
                 },
               ),
-              FutureBuilder<List<Discount>>(
-                future: Discount.getDiscounts(),
+              FutureBuilder<List<dynamic>>(
+                future: Future.wait([
+                  Discount.getDiscounts(),
+                  Daily.getDailyList(),
+                ]),
                 builder: (context, snapshot) {
+                  final List<Discount>? discounts = snapshot.data?.first as List<Discount>?;
+                  final List<Daily>? dailyList = snapshot.data?.last as List<Daily>?;
                   return TopDeals(
-                    discounts: snapshot.data ?? [],
+                    discounts: discounts ?? [],
+                    dailyList: dailyList ?? [],
                     loading: snapshot.connectionState == ConnectionState.waiting,
                   );
                 },

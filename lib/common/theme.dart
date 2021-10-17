@@ -8,6 +8,13 @@ class AppTheme {
   static const Color dirtyWhite = Color(0xFFF9F9F9);
   static const Color orange = Color(0xFFFCC127);
 
+  static const gradient = LinearGradient(
+    colors: [
+      Color(0xFFFB6824),
+      Color(0xFFFCCF27),
+    ],
+  );
+
   static getDefault() {
     final theme = ThemeData();
     return theme.copyWith(

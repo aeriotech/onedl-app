@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:fundl_app/api/models/user.model.dart';
 import 'package:fundl_app/auth/screens/age_confirmation.screen.dart';
+import 'package:fundl_app/common/assets.dart';
 import 'package:fundl_app/common/models/category.model.dart';
+import 'package:fundl_app/common/theme.dart';
 import 'package:fundl_app/common/widgets/back_button.widget.dart';
 import 'package:fundl_app/common/widgets/text_icon_button.widgets.dart';
 import 'package:fundl_app/coupon/screens/coupon.screen.dart';
@@ -140,47 +142,78 @@ class _WheelDailyScreenState extends State<WheelDailyScreen> {
         ],
       );
 
+  BoxDecoration get _backgroundDecoration => const BoxDecoration(
+        gradient: AppTheme.gradient,
+      );
+
+  TextStyle get _textStyle => const TextStyle(
+        color: Colors.white,
+        fontSize: 16.0,
+      );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _daily != null
-          ? Padding(
-              padding: const EdgeInsets.all(0.0),
-              child: Stack(
-                children: [
-                  CachedNetworkImage(
-                    imageUrl: _daily!.background!.url,
-                    fit: BoxFit.cover,
-                    // height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
-                  ),
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(
-                  //     horizontal: 64.0,
-                  //     vertical: 150.0,
-                  //   ),
-                  //   child: _buildSpinButton(context),
-                  // ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: _wheel,
+          ? Container(
+              decoration: _backgroundDecoration,
+              child: Padding(
+                padding: const EdgeInsets.all(0.0),
+                child: Stack(
+                  children: [
+                    Align(
+                      alignment: Alignment.topCenter,
+                      child: SafeArea(
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 16.0),
+                            Image.asset(
+                              AppAssets.spinAndWin,
+                              width: MediaQuery.of(context).size.width * 0.4,
+                            ),
+                            const SizedBox(height: 16.0),
+                            Text(
+                              '100% dobitno kolo sreče',
+                              style: _textStyle,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: ConfettiWidget(
-                      confettiController: _confettiController,
-                      blastDirectionality: BlastDirectionality.explosive,
-                      numberOfParticles: 50,
-                      maxBlastForce: 50,
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: SizedBox(
+                        height: 800.0,
+                        child: Stack(
+                          children: [
+                            Align(
+                              alignment: Alignment.center,
+                              child: CachedNetworkImage(
+                                imageUrl: _daily!.background!.url,
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: _wheel,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                  ScreenBackButton(
-                    onClick: () => _handleBack(context),
-                  ),
-                ],
+                    Align(
+                      alignment: Alignment.center,
+                      child: ConfettiWidget(
+                        confettiController: _confettiController,
+                        blastDirectionality: BlastDirectionality.explosive,
+                        numberOfParticles: 50,
+                        maxBlastForce: 50,
+                      ),
+                    ),
+                    ScreenBackButton(
+                      onClick: () => _handleBack(context),
+                    ),
+                  ],
+                ),
               ),
             )
           : _buildComingSoon(context),

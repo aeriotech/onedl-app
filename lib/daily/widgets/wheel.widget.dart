@@ -30,7 +30,7 @@ class Wheel extends StatelessWidget {
         alignment: Alignment.bottomCenter,
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: 40.0),
+            padding: const EdgeInsets.only(bottom: 45.0),
             child: SizedBox(
               height: size,
               child: Transform.rotate(

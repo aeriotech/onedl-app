@@ -12,10 +12,14 @@ Daily _$DailyFromJson(Map<String, dynamic> json) => Daily(
       json['background'] == null
           ? null
           : PublicFile.fromJson(json['background'] as Map<String, dynamic>),
+      json['thumbnail'] == null
+          ? null
+          : PublicFile.fromJson(json['thumbnail'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$DailyToJson(Daily instance) => <String, dynamic>{
       'uuid': instance.uuid,
       'name': instance.name,
       'background': instance.background,
+      'thumbnail': instance.thumbnail,
     };

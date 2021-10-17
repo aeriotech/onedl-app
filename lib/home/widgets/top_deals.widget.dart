@@ -3,16 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:fundl_app/api/models/discount.model.dart';
 import 'package:fundl_app/common/theme.dart';
 import 'package:fundl_app/coupon/screens/coupon.screen.dart';
+import 'package:fundl_app/daily/models/daily.model.dart';
+import 'package:fundl_app/daily/screens/wheel.screen.dart';
 import 'package:fundl_app/home/widgets/card_header.widget.dart';
 
 class TopDeals extends StatelessWidget {
   const TopDeals({
     Key? key,
     required this.discounts,
+    required this.dailyList,
     this.loading = false,
   }) : super(key: key);
 
   final List<Discount> discounts;
+  final List<Daily> dailyList;
   final bool loading;
 
   void _handleViewAll() {}
@@ -24,8 +28,23 @@ class TopDeals extends StatelessWidget {
     );
   }
 
-  Widget _buildItem(BuildContext context, int i) {
-    final discount = discounts[i];
+  Widget _buildDaily(BuildContext context, int i) {
+    final daily = dailyList[i];
+    if (daily.thumbnail == null) {
+      return const SizedBox(
+        height: 200,
+      );
+    }
+    return GestureDetector(
+      onTap: () => Navigator.of(context).pushNamed(WheelDailyScreen.routeName),
+      child: CachedNetworkImage(
+        imageUrl: daily.thumbnail!.url,
+      ),
+    );
+  }
+
+  Widget _buildDiscount(BuildContext context, int i) {
+    final discount = discounts[i - dailyList.length];
     if (discount.thumbnail == null) {
       return const SizedBox(
         height: 200,
@@ -60,8 +79,8 @@ class TopDeals extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 15.0),
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
-                itemCount: discounts.length,
-                itemBuilder: _buildItem,
+                itemCount: dailyList.length + discounts.length,
+                itemBuilder: (context, i) => i <= dailyList.length - 1 ? _buildDaily(context, i) : _buildDiscount(context, i),
               ),
             ),
             const SizedBox(height: 20.0),
