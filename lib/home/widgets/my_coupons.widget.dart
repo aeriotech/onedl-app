@@ -36,6 +36,8 @@ class MyCoupons extends StatelessWidget {
                   .map(
                     (coupon) => CouponWidget.fromCoupon(coupon),
                   )
+                  .toList()
+                  .reversed
                   .toList(),
             ),
           ),

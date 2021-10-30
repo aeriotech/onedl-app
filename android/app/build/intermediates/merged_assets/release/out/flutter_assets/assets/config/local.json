@@ -1,3 +1,4 @@
 {
-  "apiUrl": "http://192.168.1.164:4000"
+  "apiUrl": "http://192.168.1.163:4000",
+  "vapidKey": "BNMxVx-x6Jx45bnR8eg5Odl0DZR0U6L1Kj4GoLY6dSfSTT1JTCymCcUCcPT-ZBO8LHpU1TptmaxqBuSUgKtCKoA"
 }

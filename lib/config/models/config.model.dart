@@ -4,10 +4,11 @@ part 'config.model.g.dart';
 
 @JsonSerializable()
 class Config {
-  final String apiUrl;
+  final String apiUrl, vapidKey;
 
   Config({
     required this.apiUrl,
+    required this.vapidKey,
   });
 
   factory Config.fromJson(Map<String, dynamic> json) => _$ConfigFromJson(json);

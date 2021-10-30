@@ -1,3 +1,4 @@
 {
-  "apiUrl": "https://api.fundl.io"
+  "apiUrl": "https://api.fundl.io",
+  "vapidKey": "BNMxVx-x6Jx45bnR8eg5Odl0DZR0U6L1Kj4GoLY6dSfSTT1JTCymCcUCcPT-ZBO8LHpU1TptmaxqBuSUgKtCKoA"
 }

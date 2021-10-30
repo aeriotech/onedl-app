@@ -92,6 +92,8 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
         );
+      } catch (e) {
+        _showErrorSnackbar('An error occurred ${e.toString()}');
       }
     }
 

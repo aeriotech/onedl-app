@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1034859464669",
+    "project_id": "fundl-app",
+    "storage_bucket": "fundl-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1034859464669:android:18b6acf3bd1f8a14921834",
+        "android_client_info": {
+          "package_name": "io.fundl.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1034859464669-k4i1n0fcgsmi6uiu3bj1anguqon98th8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApxqs9CNxm2ZFE_F0pcfCUoUjGvpd2fEM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1034859464669-k4i1n0fcgsmi6uiu3bj1anguqon98th8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1034859464669-pktu66hjvp4sk7ia0r35gcools4nohhj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.fundl.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

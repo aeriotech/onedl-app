@@ -29,6 +29,7 @@ class HomeScreen extends StatelessWidget {
         ),
         Expanded(
           child: ListView(
+            padding: const EdgeInsets.all(0.0),
             children: [
               FutureBuilder<List<Post>>(
                 future: Post.getPosts(),

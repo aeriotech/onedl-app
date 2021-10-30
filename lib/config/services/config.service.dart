@@ -21,6 +21,7 @@ class ConfigService {
       _instance = ConfigService(
         Config(
           apiUrl: 'https://api.fundl.io',
+          vapidKey: '',
         ),
       );
     }
