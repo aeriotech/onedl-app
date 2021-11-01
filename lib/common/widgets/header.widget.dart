@@ -38,7 +38,7 @@ class Header extends StatelessWidget {
         onTap: () => _handleOnOpenGames(context),
       );
 
-  Widget get _logo => SvgPicture.asset(AppAssets.logoSvg);
+  Widget get _logo => Image.asset(AppAssets.logo);
 
   Widget _buildHeader(BuildContext context) => SizedBox(
         height: 50.0,
