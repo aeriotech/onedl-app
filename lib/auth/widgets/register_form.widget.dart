@@ -106,11 +106,13 @@ class _RegisterFormState extends State<RegisterForm> {
           FundlTextField(
             controller: _firstNameController,
             decoration: _firstNameInputDecoration,
+            textCapitalization: TextCapitalization.words,
           ),
           const SizedBox(height: 20.0),
           FundlTextField(
             controller: _lastNameController,
             decoration: _lastNameInputDecoration,
+            textCapitalization: TextCapitalization.words,
           ),
           const SizedBox(height: 20.0),
           FundlTextField(

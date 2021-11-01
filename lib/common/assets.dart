@@ -1,6 +1,7 @@
 class AppAssets {
   static const textLogo = 'assets/text_logo.svg';
   static const logo = 'assets/logo.png';
+  static const logoSvg = 'assets/logo.svg';
   static const discordLogo = 'assets/discord.svg';
   static const instagramLogo = 'assets/instagram.png';
   static const tiktokLogo = 'assets/tiktok.png';
