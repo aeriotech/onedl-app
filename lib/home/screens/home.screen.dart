@@ -58,8 +58,10 @@ class HomeScreen extends StatelessWidget {
               FutureBuilder<List<ComingSoon>>(
                 future: ComingSoon.getComingSoon(),
                 builder: (context, snapshot) {
+                  final comingSoon = snapshot.data ?? [];
+                  comingSoon.shuffle();
                   return ComingSoonWidget(
-                    comingSoon: snapshot.data ?? [],
+                    comingSoon: comingSoon,
                   );
                 },
               ),
