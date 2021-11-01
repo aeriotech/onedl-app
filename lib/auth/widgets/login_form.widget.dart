@@ -31,7 +31,7 @@ class _LoginFormState extends State<LoginForm> {
       );
 
   InputDecoration get _usernameInputDecoration => const InputDecoration(
-        hintText: 'Username',
+        hintText: 'Username / Email',
         prefixIcon: Icon(IconlyLight.profile),
       );
 
