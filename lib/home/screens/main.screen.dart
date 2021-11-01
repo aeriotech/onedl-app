@@ -5,6 +5,7 @@ import 'package:fundl_app/home/screens/home.screen.dart';
 import 'package:fundl_app/home/widgets/pages.widget.dart';
 import 'package:fundl_app/profile/screens/profile.screen.dart';
 import 'package:motion_tab_bar_v2/motion-badge.widget.dart';
+import 'package:upgrader/upgrader.dart';
 
 class MainScreen extends StatelessWidget {
   static const routeName = '/main';
@@ -34,6 +35,10 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Pages(pages: _pages);
+    return UpgradeAlert(
+      child: Pages(
+        pages: _pages,
+      ),
+    );
   }
 }

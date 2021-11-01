@@ -34,7 +34,7 @@ class App extends StatelessWidget {
         ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
         MainScreen.routeName: (context) => const MainScreen(),
         DiscountScreen.routeName: (context) => const DiscountScreen(),
-        WheelDailyScreen.routeName: (context) => WheelDailyScreen(),
+        WheelDailyScreen.routeName: (context) => const WheelDailyScreen(),
       },
     );
   }
