@@ -47,6 +47,7 @@ class HomeScreen extends StatelessWidget {
                 builder: (context, snapshot) {
                   final List<Discount>? discounts = snapshot.data?.first as List<Discount>?;
                   final List<Daily>? dailyList = snapshot.data?.last as List<Daily>?;
+                  discounts?.shuffle();
                   return TopDeals(
                     discounts: discounts ?? [],
                     dailyList: dailyList ?? [],
