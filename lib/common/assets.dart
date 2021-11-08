@@ -14,4 +14,5 @@ class AppAssets {
   static const chatPreview = 'assets/chat_preview.png';
   static const wheel = 'assets/wheel.png';
   static const spinAndWin = 'assets/spin_and_win.png';
+  static const textLogoWhiteSvg = 'assets/text_logo_white.svg';
 }

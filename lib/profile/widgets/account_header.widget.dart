@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:fundl_app/common/assets.dart';
 import 'package:fundl_app/common/theme.dart';
 import 'package:fundl_app/profile/widgets/square_background.widget.dart';
@@ -92,13 +93,28 @@ class ProfileHeader extends StatelessWidget {
         child: Divider(thickness: 2.0),
       );
 
+  Widget get _topLogo => Container(
+        height: 200.0,
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 16.0),
+          child: Center(
+            child: SvgPicture.asset(
+              AppAssets.textLogoWhiteSvg,
+            ),
+          ),
+        ),
+        decoration: const BoxDecoration(
+          gradient: AppTheme.gradient,
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         ClipPath(
           clipper: TopCurve(),
-          child: const SquareBackground(),
+          child: _topLogo,
         ),
         Column(
           mainAxisSize: MainAxisSize.min,
