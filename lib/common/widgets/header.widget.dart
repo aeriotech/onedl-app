@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:fundl_app/common/assets.dart';
 import 'package:fundl_app/daily/screens/wheel.screen.dart';
 
@@ -41,7 +40,7 @@ class Header extends StatelessWidget {
   Widget get _logo => Image.asset(AppAssets.logo);
 
   Widget _buildHeader(BuildContext context) => SizedBox(
-        height: 50.0,
+        height: 60.0,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Stack(

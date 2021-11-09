@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fundl_app/common/assets.dart';
 import 'package:fundl_app/common/theme.dart';
-import 'package:fundl_app/profile/widgets/square_background.widget.dart';
 import 'package:fundl_app/profile/widgets/curve_clipper.widget.dart';
 
 class ProfileHeader extends StatelessWidget {
