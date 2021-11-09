@@ -44,22 +44,16 @@ class CouponWidget extends StatelessWidget {
         fontWeight: FontWeight.bold,
       );
 
-  Widget get _image => Material(
-        elevation: 8.0,
-        shadowColor: Colors.black.withOpacity(0.50),
-        borderRadius: BorderRadius.circular(12.0),
-        clipBehavior: Clip.antiAlias,
-        child: SizedBox(
-          width: 130.0,
-          height: 130.0,
-          child: imageUrl != null
-              ? CachedNetworkImage(imageUrl: imageUrl!)
-              : const Icon(
-                  IconlyLight.star,
-                  size: 60.0,
-                  color: AppTheme.orange,
-                ),
-        ),
+  Widget get _image => SizedBox(
+        width: 130.0,
+        height: 130.0,
+        child: imageUrl != null
+            ? CachedNetworkImage(imageUrl: imageUrl!)
+            : const Icon(
+                IconlyLight.star,
+                size: 60.0,
+                color: AppTheme.orange,
+              ),
       );
 
   @override

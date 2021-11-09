@@ -22,27 +22,24 @@ class ComingSoonItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Opacity(
-        opacity: 0.5,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              decoration: _imageDecoration,
-              clipBehavior: Clip.antiAlias,
-              child: CachedNetworkImage(
-                imageUrl: comingSoon.image.url,
-                width: 80.0,
-                height: 80.0,
-              ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            decoration: _imageDecoration,
+            clipBehavior: Clip.antiAlias,
+            child: CachedNetworkImage(
+              imageUrl: comingSoon.image.url,
+              width: 80.0,
+              height: 80.0,
             ),
-            const SizedBox(height: 10.0),
-            Text(
-              comingSoon.name,
-              style: _textStyle,
-            ),
-          ],
-        ),
+          ),
+          // const SizedBox(height: 10.0),
+          // Text(
+          //   comingSoon.name,
+          //   style: _textStyle,
+          // ),
+        ],
       ),
     );
   }
