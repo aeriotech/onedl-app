@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:fundl_app/common/theme.dart';
 import 'package:fundl_app/coupon/models/coupon.model.dart';
@@ -71,19 +72,21 @@ class CouponWidget extends StatelessWidget {
               SizedBox(
                 width: 130.0,
                 height: 20.0,
-                child: title.length <= 16
-                    ? Text(
-                        title,
-                        style: _titleStyle,
-                      )
-                    : Marquee(
-                        text: title,
-                        blankSpace: 30.0,
-                        velocity: 30.0,
-                        fadingEdgeStartFraction: 0.1,
-                        fadingEdgeEndFraction: 0.1,
-                        style: _titleStyle,
-                      ),
+                child: title.contains('</')
+                    ? Html(data: title)
+                    : title.length <= 16
+                        ? Text(
+                            title,
+                            style: _titleStyle,
+                          )
+                        : Marquee(
+                            text: title,
+                            blankSpace: 30.0,
+                            velocity: 30.0,
+                            fadingEdgeStartFraction: 0.1,
+                            fadingEdgeEndFraction: 0.1,
+                            style: _titleStyle,
+                          ),
               ),
               // const RatingBar(
               //   rating: 4.5,

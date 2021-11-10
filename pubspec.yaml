@@ -23,6 +23,7 @@ dependencies:
   cached_network_image: ^3.1.0
   flutter_markdown: ^0.6.6
   smooth_page_indicator: ^1.0.0+2
+  flutter_html: ^2.1.5
 
   # Coupons
   barcode_widget: ^2.0.1

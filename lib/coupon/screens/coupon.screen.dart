@@ -5,6 +5,7 @@ import 'package:barcode_widget/barcode_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:fundl_app/api/exceptions/api/age_limit.exception.dart';
@@ -195,18 +196,29 @@ class DiscountScreen extends StatelessWidget {
                             height: 400.0,
                           ),
                         ),
-                      Text(
-                        discount.name,
-                        style: _nameStyle,
-                      ),
+                      // Check if the discount name is HTML or Markdown
+                      discount.name.contains('</')
+                          ? Html(
+                              data: discount.name,
+                              onLinkTap: (url, context, _, __) => _handleUrlClick(url),
+                            )
+                          : Text(
+                              discount.name,
+                              style: _nameStyle,
+                            ),
                       const SizedBox(height: 20.0),
-                      MarkdownBody(
-                        data: discount.description,
-                        onTapLink: (_, url, __) => _handleUrlClick(url),
-                        styleSheet: MarkdownStyleSheet(
-                          textAlign: WrapAlignment.center,
-                        ),
-                      ),
+                      discount.description.contains('</')
+                          ? Html(
+                              data: discount.description,
+                              onLinkTap: (url, context, _, __) => _handleUrlClick(url),
+                            )
+                          : MarkdownBody(
+                              data: discount.description,
+                              onTapLink: (_, url, __) => _handleUrlClick(url),
+                              styleSheet: MarkdownStyleSheet(
+                                textAlign: WrapAlignment.center,
+                              ),
+                            ),
                       const Spacer(),
                       FutureBuilder<List<Coupon>>(
                         future: Coupon.getCoupons(),
